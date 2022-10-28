@@ -1,43 +1,27 @@
 package tkim.modelo;
 
 public abstract class Cliente {
-	
-	private String nif;
 	private String nombre;
 	private String domicilio;
+	private String nif;
 	private String email;
 	
-	
-	//Methods
-	
-			public abstract String tipoCliente();
-			public abstract float calcAnual();
-			public abstract float descuentoEnv();
-			
+	public abstract String tipoCliente();
+	public abstract float calcAnual();
+	public abstract float descuentoEnv();
+
 	/**
-	 * @param nif
 	 * @param nombre
 	 * @param domicilio
+	 * @param nif
 	 * @param email
 	 */
-	public Cliente(String nif, String nombre, String domicilio, String email) {
+	public Cliente(String nombre, String domicilio, String nif, String email) {
 		super();
-		this.nif = nif;
 		this.nombre = nombre;
 		this.domicilio = domicilio;
-		this.email = email;
-	}
-	/**
-	 * @return the nif
-	 */
-	public String getNif() {
-		return nif;
-	}
-	/**
-	 * @param nif the nif to set
-	 */
-	public void setNif(String nif) {
 		this.nif = nif;
+		this.email = email;
 	}
 	/**
 	 * @return the nombre
@@ -64,6 +48,18 @@ public abstract class Cliente {
 		this.domicilio = domicilio;
 	}
 	/**
+	 * @return the nif
+	 */
+	public String getNif() {
+		return nif;
+	}
+	/**
+	 * @param nif the nif to set
+	 */
+	public void setNif(String nif) {
+		this.nif = nif;
+	}
+	/**
 	 * @return the email
 	 */
 	public String getEmail() {
@@ -77,22 +73,8 @@ public abstract class Cliente {
 	}
 	@Override
 	public String toString() {
-		return "Cliente [nif=" + nif + ", nombre=" + nombre + ", domicilio=" + domicilio + ", email=" + email
+		return "Cliente [nombre=" + nombre + ", domicilio=" + domicilio + ", nif=" + nif + ", email=" + email
 				+ ", tipoCliente()=" + tipoCliente() + ", calcAnual()=" + calcAnual() + ", descuentoEnv()="
-				+ descuentoEnv() + ", getNif()=" + getNif() + ", getNombre()=" + getNombre() + ", getDomicilio()="
-				+ getDomicilio() + ", getEmail()=" + getEmail() + "]";
+				+ descuentoEnv() + "]";
 	}
-
-	
-
-	
-		
-
-		
-
-		
-
-	
 }
-
-
