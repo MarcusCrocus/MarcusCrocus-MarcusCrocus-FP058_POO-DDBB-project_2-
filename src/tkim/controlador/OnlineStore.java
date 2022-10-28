@@ -85,11 +85,11 @@ public class OnlineStore {
 	void pausar() {
 		String entrada;
 		do{
-			System.out.println("Presiona enter para continuar...");
+			System.out.println("Presiona 0 para ir al menu principal...");
 		    entrada  = teclado.nextLine();
 		    System.out.println(entrada);
 		 }
-		 while(!entrada.equals(""));
+		 while(!entrada.equals("0"));
 	}
 	
 	/**
