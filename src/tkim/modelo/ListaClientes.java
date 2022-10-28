@@ -5,15 +5,14 @@ import java.util.List;
 
 public class ListaClientes extends Listas<Cliente> {
 
-<<<<<<< HEAD
+
 	public String anadirCliente(String nombre, String domi, String nif, String mail, String tipoCliente,
 			Listas<Cliente> cliente) {
-=======
+
 	
 	public String anadirCliente(String nombre, String domi, String nif, String mail, String tipoCliente, Listas<Cliente> listasClientes) {
->>>>>>> branch 'master' of https://github.com/MarcusCrocus/MarcusCrocus-MarcusCrocus-FP058_POO-DDBB-project_2-.git
-		
-<<<<<<< HEAD
+
+
 		try {
 			Cliente clientes = new ClienteEstandar(nombre, domi, nif, mail);
 			cliente.addDato(clientes);
@@ -21,7 +20,7 @@ public class ListaClientes extends Listas<Cliente> {
 		} catch (Exception e) {
 			return "El cliente no ha podido introducirse correctamente";
 		}
-=======
+
 
 		
 			switch (tipoCliente) { 
@@ -42,16 +41,13 @@ public class ListaClientes extends Listas<Cliente> {
 					
 			}
 			return tipoCliente;
->>>>>>> branch 'master' of https://github.com/MarcusCrocus/MarcusCrocus-MarcusCrocus-FP058_POO-DDBB-project_2-.git
-	}
 
-<<<<<<< HEAD
 	public boolean ifExist(String nif, Listas<Cliente> c) {
 		boolean existe = false;
 		for (Cliente cliente : c.getDato()) {
 			if (cliente.getNif().equals(nif)) {
 				existe = true;
-=======
+
 	// Metodo para comprobar si cliente existe
 	
 	public boolean existeCliente(String nif,Listas<Cliente> cli) {
@@ -67,12 +63,10 @@ public class ListaClientes extends Listas<Cliente> {
 				}
 			
 			return existe;
->>>>>>> branch 'master' of https://github.com/MarcusCrocus/MarcusCrocus-MarcusCrocus-FP058_POO-DDBB-project_2-.git
 
-<<<<<<< HEAD
 				break;
 			}
-=======
+
 		}
 		
 
@@ -106,8 +100,6 @@ public class ListaClientes extends Listas<Cliente> {
 
 			return showClientesPremium;
 		}
->>>>>>> branch 'master' of https://github.com/MarcusCrocus/MarcusCrocus-MarcusCrocus-FP058_POO-DDBB-project_2-.git
-
 		}
 		return existe;
 	}
@@ -144,7 +136,3 @@ public class ListaClientes extends Listas<Cliente> {
 	}
 
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/MarcusCrocus/MarcusCrocus-MarcusCrocus-FP058_POO-DDBB-project_2-.git
