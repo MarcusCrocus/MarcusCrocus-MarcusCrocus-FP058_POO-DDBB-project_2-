@@ -22,10 +22,10 @@ public class Controlador {
 			return lc.anadirCliente(nombre,domi,nif, mail, tipoCliente, datos.getClientes());
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+			return null;
 		}
 		
-		return "hola";
+		
 		
 	}
 	
