@@ -1,5 +1,6 @@
 package tkim.modelo;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -45,7 +46,40 @@ public class ListaPedidos {
 	}
 	
 	public String eliminarPedido(int codigoPedido, Listas<Pedido> p) {
-		return "El pedido ha sido eliminado";
-	}
+	      String resultado = "El pedido no ha podido ser eliminado porque ya se ha enviado";
+	        for (Pedido pedido : p.getDato()) {
+	            if (codigoPedido == pedido.getNumeroPedido()){
 
+	                Duration duration = Duration.between(pedido.getFechaHoraPedido(), LocalDateTime.now());
+	                long diff =  Math.abs(duration.toMinutes());
+	                boolean enviado_pendiente = pedido.getArticulos().getTiempoPreparacion() > diff;
+
+	                if (enviado_pendiente){
+	                    p.getDato().remove(pedido);
+	                    resultado = "El pedido ha sido eliminado";
+	                }
+	            }
+	        }
+	        return resultado;
+
+	}
+	
+	
+    public ArrayList<Pedido> mostrarPedEnviados(String nif, Listas<Pedido> lped){
+        ArrayList<Pedido> pedidosEnviados = new ArrayList<>();
+        for (Pedido pd : lped.getDato()) {
+            if (nif.equals(pd.getCliente().getNif())){
+
+                Duration duration = Duration.between(pd.getFechaHoraPedido(), LocalDateTime.now());
+                long diff =  Math.abs(duration.toMinutes());
+
+                if (pd.getArticulos().getTiempoPreparacion() < diff){
+                    pedidosEnviados.add(pd);
+                }
+
+            }
+
+        }
+        return pedidosEnviados;
+    }
 }

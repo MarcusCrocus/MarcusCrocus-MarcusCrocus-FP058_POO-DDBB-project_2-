@@ -5,9 +5,15 @@ import java.util.List;
 
 public class ListaClientes extends Listas<Cliente> {
 
+<<<<<<< HEAD
 	public String anadirCliente(String nombre, String domi, String nif, String mail, String tipoCliente,
 			Listas<Cliente> cliente) {
+=======
+	
+	public String anadirCliente(String nombre, String domi, String nif, String mail, String tipoCliente, Listas<Cliente> listasClientes) {
+>>>>>>> branch 'master' of https://github.com/MarcusCrocus/MarcusCrocus-MarcusCrocus-FP058_POO-DDBB-project_2-.git
 		
+<<<<<<< HEAD
 		try {
 			Cliente clientes = new ClienteEstandar(nombre, domi, nif, mail);
 			cliente.addDato(clientes);
@@ -15,16 +21,92 @@ public class ListaClientes extends Listas<Cliente> {
 		} catch (Exception e) {
 			return "El cliente no ha podido introducirse correctamente";
 		}
+=======
+
+		
+			switch (tipoCliente) { 
+					 
+				case "1":
+						 
+					Cliente ClienteEstandar = new ClienteEstandar(nombre, domi, nif, mail);
+					listasClientes.addDato(ClienteEstandar);
+					
+					return "The Client was added: " + ClienteEstandar.getNif() +" "+ ClienteEstandar.getNombre();
+			
+				case "2": 
+					
+					Cliente ClientePeremium = new ClientePremium(nombre, domi, nif, mail);
+					listasClientes.addDato(ClientePeremium);
+			
+					return "The Client was added: " + ClientePeremium.getNif() +" "+ ClientePeremium.getNombre(); 
+					
+			}
+			return tipoCliente;
+>>>>>>> branch 'master' of https://github.com/MarcusCrocus/MarcusCrocus-MarcusCrocus-FP058_POO-DDBB-project_2-.git
 	}
 
+<<<<<<< HEAD
 	public boolean ifExist(String nif, Listas<Cliente> c) {
 		boolean existe = false;
 		for (Cliente cliente : c.getDato()) {
 			if (cliente.getNif().equals(nif)) {
 				existe = true;
+=======
+	// Metodo para comprobar si cliente existe
+	
+	public boolean existeCliente(String nif,Listas<Cliente> cli) {
+			
+			
+			boolean existe = false;
+			
+				for (Cliente a : cli.getDato()) {
+					if (a.getNif().equals(nif)) {
+						existe = true;
+						break;
+					}
+				}
+			
+			return existe;
+>>>>>>> branch 'master' of https://github.com/MarcusCrocus/MarcusCrocus-MarcusCrocus-FP058_POO-DDBB-project_2-.git
 
+<<<<<<< HEAD
 				break;
 			}
+=======
+		}
+		
+
+		
+	//Metodos para Mostrar Clientes Estandar y Cliente Premium	
+		
+		public List<Cliente> mostrarClienteEstandar(Listas<Cliente> clientes) {
+			
+			List<Cliente> clientesEstandar = new ArrayList<>();
+				for (Cliente var : clientes.getDato()) {
+					if (var.tipoCliente() == "Cliente Estandar") {
+						clientesEstandar.add(var);
+					}
+					
+				}
+
+			
+			return clientesEstandar;
+		}
+		
+		public List<Cliente> mostrarClientePremium(Listas<Cliente> clientes) {
+			
+			List<Cliente> showClientesPremium = new ArrayList<>();
+				for (Cliente var : clientes.getDato()) {
+					if (var.tipoCliente() == "Cliente Premium") {
+						showClientesPremium.add(var);
+					}
+					
+				}
+				
+
+			return showClientesPremium;
+		}
+>>>>>>> branch 'master' of https://github.com/MarcusCrocus/MarcusCrocus-MarcusCrocus-FP058_POO-DDBB-project_2-.git
 
 		}
 		return existe;
@@ -62,3 +144,7 @@ public class ListaClientes extends Listas<Cliente> {
 	}
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/MarcusCrocus/MarcusCrocus-MarcusCrocus-FP058_POO-DDBB-project_2-.git
