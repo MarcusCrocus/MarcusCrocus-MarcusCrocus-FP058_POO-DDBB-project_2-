@@ -1,15 +1,16 @@
 package tkim.modelo;
 
 public class ClientePremium extends Cliente {
-
-	public ClientePremium(String nif, String nombre, String domicilio, String email,String tipCliente) {
-		super(nif, nombre, domicilio, email);
+	
+	public ClientePremium(String nombre, String domicilio, String nif, String email) {
+		super(nombre, domicilio, nif, email);
+		
 	}
 
 	@Override
 	public String tipoCliente() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Cliente Premium";
 	}
 
 	@Override
@@ -21,13 +22,8 @@ public class ClientePremium extends Cliente {
 	@Override
 	public float descuentoEnv() {
 		// TODO Auto-generated method stub
-		return 0.2f;
+		return 20;
 	}
 	
 	
-
-
-
-	
-
 }
