@@ -1,63 +1,40 @@
 package tkim.modelo;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Datos {
-
-	private Listas<Cliente> clientes = new Listas<>();
-	/*
-	 * private Listas<Pedidos> pedidos = new Listas<> (); private Listas <Atriculos>
-	 * articulos = new Listas<>();
-	 */
-
 	
+	private Listas<Cliente> clientes;
+	private Listas<Articulo> articulos;
+	private Listas<Pedido> pedidos;
+
 	/**
-	 * @return the clientes
+	 * @param clientes
+	 * @param articulos
+	 * @param pedidos
 	 */
+	public Datos() {
+		super();
+		this.clientes =  new Listas<Cliente>();
+		this.articulos = new Listas<Articulo>();
+		this.pedidos = new Listas<Pedido>();
+	}
 	public Listas<Cliente> getClientes() {
 		return clientes;
 	}
-
-	/**
-	 * @param clientes the clientes to set
-	 */
-	public void setClientes(Listas<Cliente> clientes) {
-		this.clientes = clientes;
+	public void addCliente(Cliente cliente) {
+		this.clientes.addDato(cliente);
 	}
-
-	public boolean serchCliente(String nif) {
-		
-		
-		boolean existe = false;
-		
-			for (Cliente a : clientes.getDato()) {
-				if (a.getNif().equals(nif)) {
-					existe = true;
-					break;
-				}
-			}
-		
-		return existe;
-
+	public Listas<Articulo> getArticulos() {
+		return articulos;
 	}
-
-	public List<Cliente> showClientesEstandar(Listas<Cliente> clientes) {
-		
-		List<Cliente> clientesEstandar = new ArrayList<>();
-			for (Cliente var : clientes.getDato()) {
-				if (var.tipoCliente() == "Cliente_Estandar") {
-					clientesEstandar.add(var);
-				}
-				
-			}
-			
-		
-		
-		
-		return clientesEstandar;
+	public void addArticulo(Articulo articulo) {
+		articulos.addDato(articulo);
 	}
-
-
-
+	public Listas<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void addPedido(Pedido pedido) {
+		pedidos.addDato(pedido);
+	}
+		
 }
