@@ -76,7 +76,7 @@ public class ListaClientes extends Listas<Cliente> {
 					}
 					
 				}
-				
+//pequeño cambio				
 
 			return showClientesPremium;
 		}
