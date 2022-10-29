@@ -11,8 +11,17 @@ public class ListaPedidos {
 			Articulo articulo, Listas<Pedido> p) {
 		String mensaje = "";
 		try {
-
-			Pedido pedido = new Pedido(numeroPedido, unidadesPedido, fechaHoraPedido, cliente, articulo);
+			float totalPedido = unidadesPedido*articulo.getPrecioVenta();
+			float gastosEnvio = articulo.getGastosEnvio();
+			float a = cliente.descuentoEnv();
+			if (cliente.tipoCliente().equals("Cliente Premium")) {
+				gastosEnvio *= totalPedido-(cliente.descuentoEnv()/100);
+				totalPedido += gastosEnvio;
+			}else {
+				totalPedido += gastosEnvio;
+			}
+			
+			Pedido pedido = new Pedido(numeroPedido, unidadesPedido, fechaHoraPedido, totalPedido, cliente, articulo);
 			p.addDato(pedido);
 			mensaje = "El pedido se ha insertado correctamente";
 		} catch (NullPointerException e) {
@@ -52,7 +61,7 @@ public class ListaPedidos {
 
 				Duration duration = Duration.between(pedido.getFechaHoraPedido(), LocalDateTime.now());
 				long diff = Math.abs(duration.toMinutes());
-				boolean enviado_pendiente = pedido.getArticulos().getTiempoPreparacion() > diff;
+				boolean enviado_pendiente = pedido.getArticulo().getTiempoPreparacion() > diff;
 
 				if (enviado_pendiente) {
 					p.getDato().remove(pedido);
@@ -73,7 +82,7 @@ public class ListaPedidos {
 				Duration duration = Duration.between(pd.getFechaHoraPedido(), LocalDateTime.now());
 				long diff = Math.abs(duration.toMinutes());
 
-				if (pd.getArticulos().getTiempoPreparacion() < diff) {
+				if (pd.getArticulo().getTiempoPreparacion() < diff) {
 					pedidosEnviados.add(pd);
 				}
 
@@ -92,7 +101,7 @@ public class ListaPedidos {
 				Duration duration = Duration.between(pd.getFechaHoraPedido(), LocalDateTime.now());
 				long diff = Math.abs(duration.toMinutes());
 
-				if (pd.getArticulos().getTiempoPreparacion() > diff) {
+				if (pd.getArticulo().getTiempoPreparacion() > diff) {
 					pedidosPendientes.add(pd);
 				}
 
