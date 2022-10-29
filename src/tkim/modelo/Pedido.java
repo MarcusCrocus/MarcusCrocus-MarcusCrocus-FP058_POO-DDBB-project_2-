@@ -70,6 +70,14 @@ public class Pedido {
 		this.articulo = articulo;
 	}
 	
+	@Override
+	public String toString() {
+		return "Pedido [numeroPedido=" + numeroPedido + ", unidadesPedido=" + unidadesPedido + ", fechaHoraPedido="
+				+ fechaHoraPedido + ", totalPedido=" + totalPedido + ", cliente=" + cliente + ", articulo=" + articulo
+				+ "]";
+	}
+	
+	
 	
 	
 	
