@@ -32,6 +32,7 @@ public class Pedido {
 		this.cliente = cliente;
 		this.articulo = articulo;
 	}
+	
 	public int getNumeroPedido() {
 		return numeroPedido;
 	}
