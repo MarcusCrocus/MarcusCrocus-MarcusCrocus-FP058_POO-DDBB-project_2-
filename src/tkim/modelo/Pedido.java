@@ -12,8 +12,6 @@ public class Pedido {
 	private int unidadesPedido;
 	private LocalDateTime fechaHoraPedido;
 	private float totalPedido;
-	
-	
 	private Cliente cliente;
 	private Articulo articulo;
 	/**
