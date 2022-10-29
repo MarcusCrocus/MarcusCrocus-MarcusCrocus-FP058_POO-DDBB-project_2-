@@ -32,7 +32,7 @@ public class Pedido {
 		this.cliente = cliente;
 		this.articulo = articulo;
 	}
-	
+	//comentario
 	public int getNumeroPedido() {
 		return numeroPedido;
 	}
