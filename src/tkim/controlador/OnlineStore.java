@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -317,11 +318,29 @@ public class OnlineStore {
 	void mostrarPedidosEnviados() {
 		//Aqui llamaremos al controlador para que nos devuelva la lista de pedidos con el filtro de enviados
 		//y lo mostraremos
+		String numeroClientes = "0";
+		String cliente = "";
+		System.out.println("Escoge un cliente:");
+		System.out.println("");
+		
+		//Aqui llamaremos al controlador para que nos devuelva la lista de clientes y listarlos
+		for (int i = 0; i < contro.datos.getClientes().getDato().size(); i++) {
+			System.out.println(i+1+". "+contro.datos.getClientes().getDato().get(i).getNombre()+"\n");
+			numeroClientes += String.valueOf(i+1) + ",";
+		}
+		System.out.println("");
+		
+		System.out.println("");
+		do {
+			System.out.println("Elige una opción (" + numeroClientes.substring(1) + "): ");
+			cliente = teclado.nextLine();
+		} while (!numeroClientes.contains(cliente));
+		
+		List <Pedido> pedidos = contro.mostrarPedEnviados(Integer.parseInt(cliente));
 		System.out.println("##########################################################################");
 		System.out.println("######################## PEDIDOS ENVIADOS ################################");
 		System.out.println("##########################################################################");
 		System.out.println("");
-		ArrayList<Pedido> pedidos = new ArrayList<>();
 		for (Pedido pedido : pedidos) {
 			System.out.println(pedido+"\n");
 		}
@@ -339,12 +358,31 @@ public class OnlineStore {
 	void mostrarPedidosPendientes() {
 		//Aqui llamaremos al controlador para que nos devuelva la lista de pedidos con el filtro de pendientes
 		//y lo mostraremos
+		String numeroClientes = "0";
+		String cliente = "";
+		System.out.println("Escoge un cliente:");
+		System.out.println("");
+		
+		//Aqui llamaremos al controlador para que nos devuelva la lista de clientes y listarlos
+		for (int i = 0; i < contro.datos.getClientes().getDato().size(); i++) {
+			System.out.println(i+1+". "+contro.datos.getClientes().getDato().get(i).getNombre()+"\n");
+			numeroClientes += String.valueOf(i+1) + ",";
+		}
+		System.out.println("");
+		
+		System.out.println("");
+		do {
+			System.out.println("Elige una opción (" + numeroClientes.substring(1) + "): ");
+			cliente = teclado.nextLine();
+		} while (!numeroClientes.contains(cliente));
+		
+		List <Pedido> pedidos = contro.mostrarPedPendientes(Integer.parseInt(cliente));
 		System.out.println("##########################################################################");
 		System.out.println("######################## PEDIDOS PENDIENTES ##############################");
 		System.out.println("##########################################################################");
 		System.out.println("");
-		for (int i = 0; i < contro.datos.getPedidos().getDato().size(); i++) {
-			System.out.println(i+1+". "+contro.datos.getPedidos().getDato().get(i));
+		for (Pedido pedido : pedidos) {
+			System.out.println(pedido+"\n");
 		}
 		System.out.println("");
 		System.out.println("##########################################################################");
@@ -408,16 +446,20 @@ public class OnlineStore {
 	  
 	  
 	  //Creamos dos articulos y los agregamos a la lista generica de articulos
-	  Articulo articulo1 = new Articulo("a1", "silla", 20.09f, 3.10f, 3600);
-	  Articulo articulo2 = new Articulo("a2", "mesa", 35.15f, 4.95f, 7200);
+	  Articulo articulo1 = new Articulo("a1", "silla", 20.09f, 3.10f, 360);
+	  Articulo articulo2 = new Articulo("a2", "mesa", 35.15f, 4.95f, 720);
+	  Articulo articulo3 = new Articulo("a3", "armario", 35.15f, 4.95f, 7200);
 	  contro.datos.getArticulos().addDato(articulo1);
 	  contro.datos.getArticulos().addDato(articulo2);
+	  contro.datos.getArticulos().addDato(articulo3);
 	  
 	  //Por ultimo creamos los pedidos y los agregamos a la lista generica de pedidos
 	  Pedido pedido1 = new Pedido(1, 1, fechaActual.plusDays(-1), contro.datos.getClientes().getDato().get(0), contro.datos.getArticulos().getDato().get(0));
 	  Pedido pedido2 = new Pedido(2, 1, fechaActual.plusDays(-2), contro.datos.getClientes().getDato().get(1), contro.datos.getArticulos().getDato().get(1));
+	  Pedido pedido3 = new Pedido(3, 1, fechaActual.plusDays(-2), contro.datos.getClientes().getDato().get(1), contro.datos.getArticulos().getDato().get(2));
 	  
 	  contro.datos.getPedidos().addDato(pedido1);
 	  contro.datos.getPedidos().addDato(pedido2);
+	  contro.datos.getPedidos().addDato(pedido3);
 	}
 }
