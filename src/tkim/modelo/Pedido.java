@@ -20,86 +20,60 @@ public class Pedido {
 	 * @param numeroPedido
 	 * @param unidadesPedido
 	 * @param fechaHoraPedido
+	 * @param totalPedido
 	 * @param cliente
 	 * @param articulo
 	 */
-	public Pedido(int numeroPedido, int unidadesPedido, LocalDateTime fechaHoraPedido, Cliente cliente,
-			Articulo articulo) {
+	public Pedido(int numeroPedido, int unidadesPedido, LocalDateTime fechaHoraPedido, float totalPedido,
+			Cliente cliente, Articulo articulo) {
+		super();
 		this.numeroPedido = numeroPedido;
 		this.unidadesPedido = unidadesPedido;
 		this.fechaHoraPedido = fechaHoraPedido;
+		this.totalPedido = totalPedido;
 		this.cliente = cliente;
 		this.articulo = articulo;
 	}
-	/**
-	 * @return the numeroPedido
-	 */
 	public int getNumeroPedido() {
 		return numeroPedido;
 	}
-	/**
-	 * @param numeroPedido the numeroPedido to set
-	 */
 	public void setNumeroPedido(int numeroPedido) {
 		this.numeroPedido = numeroPedido;
 	}
-	/**
-	 * @return the unidadesPedido
-	 */
 	public int getUnidadesPedido() {
 		return unidadesPedido;
 	}
-	/**
-	 * @param unidadesPedido the unidadesPedido to set
-	 */
 	public void setUnidadesPedido(int unidadesPedido) {
 		this.unidadesPedido = unidadesPedido;
 	}
-	/**
-	 * @return the fechaHoraPedido
-	 */
 	public LocalDateTime getFechaHoraPedido() {
 		return fechaHoraPedido;
 	}
-	/**
-	 * @param fechaHoraPedido the fechaHoraPedido to set
-	 */
 	public void setFechaHoraPedido(LocalDateTime fechaHoraPedido) {
 		this.fechaHoraPedido = fechaHoraPedido;
 	}
-	/**
-	 * @return the cliente
-	 */
+	public float getTotalPedido() {
+		return totalPedido;
+	}
+	public void setTotalPedido(float totalPedido) {
+		this.totalPedido = totalPedido;
+	}
 	public Cliente getCliente() {
 		return cliente;
 	}
-	/**
-	 * @param cliente the cliente to set
-	 */
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	/**
-	 * @return the articulo
-	 */
-	public Articulo getArticulos() {
+	public Articulo getArticulo() {
 		return articulo;
 	}
-	/**
-	 * @param articulo the articulo to set
-	 */
-	public void setArticulos(Articulo articulo) {
+	public void setArticulo(Articulo articulo) {
 		this.articulo = articulo;
 	}
-	@Override
-	public String toString() {
-		return "Pedido [numeroPedido=" + numeroPedido + ", unidadesPedido=" + unidadesPedido + ", fechaHoraPedido="
-				+ fechaHoraPedido + ", cliente=" + cliente + ", articulo=" + articulo + ", getNumeroPedido()="
-				+ getNumeroPedido() + ", getUnidadesPedido()=" + getUnidadesPedido() + ", getFechaHoraPedido()="
-				+ getFechaHoraPedido() + ", getCliente()=" + getCliente() + ", getArticulos()=" + getArticulos()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
-	}
+	
+	
+	
+	
 	
 	
 }
