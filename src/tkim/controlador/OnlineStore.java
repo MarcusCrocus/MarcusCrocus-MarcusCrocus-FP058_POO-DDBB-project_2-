@@ -310,6 +310,8 @@ public class OnlineStore {
 		System.out.println("Pon el numero de pedido que quieres eliminar: ");
 		int numeroPedido = Integer.parseInt(teclado.nextLine());
 		System.out.println(contro.eliminarPedido(numeroPedido));
+		System.out.println("");
+		pausar();
 	}
 	
 	/**
