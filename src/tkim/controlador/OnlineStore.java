@@ -1,10 +1,7 @@
 package tkim.controlador;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -456,9 +453,9 @@ public class OnlineStore {
 	  contro.datos.getArticulos().addDato(articulo3);
 	  
 	  //Por ultimo creamos los pedidos y los agregamos a la lista generica de pedidos
-	  Pedido pedido1 = new Pedido(1, 1, fechaActual.plusDays(-1), contro.datos.getClientes().getDato().get(0), contro.datos.getArticulos().getDato().get(0));
-	  Pedido pedido2 = new Pedido(2, 1, fechaActual.plusDays(-2), contro.datos.getClientes().getDato().get(1), contro.datos.getArticulos().getDato().get(1));
-	  Pedido pedido3 = new Pedido(3, 1, fechaActual.plusDays(-2), contro.datos.getClientes().getDato().get(1), contro.datos.getArticulos().getDato().get(2));
+	  Pedido pedido1 = new Pedido(1, 1, fechaActual.plusDays(-1), 150, contro.datos.getClientes().getDato().get(0), contro.datos.getArticulos().getDato().get(0));
+	  Pedido pedido2 = new Pedido(2, 1, fechaActual.plusDays(-2), 210.10f, contro.datos.getClientes().getDato().get(1), contro.datos.getArticulos().getDato().get(1));
+	  Pedido pedido3 = new Pedido(3, 1, fechaActual.plusDays(-2), 21.10f, contro.datos.getClientes().getDato().get(1), contro.datos.getArticulos().getDato().get(2));
 	  
 	  contro.datos.getPedidos().addDato(pedido1);
 	  contro.datos.getPedidos().addDato(pedido2);
