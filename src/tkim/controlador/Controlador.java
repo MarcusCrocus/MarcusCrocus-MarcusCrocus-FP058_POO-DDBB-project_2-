@@ -9,6 +9,7 @@ import tkim.modelo.Datos;
 import tkim.modelo.ListaArticulos;
 import tkim.modelo.ListaClientes;
 import tkim.modelo.ListaPedidos;
+import tkim.modelo.Pedido;
 
 public class Controlador {
 	
@@ -82,7 +83,17 @@ public class Controlador {
 	public String eliminarPedido(int codigoPedido) {
 		return lp.eliminarPedido(codigoPedido, datos.getPedidos());
 	}
-
+	
+	public List<Pedido> mostrarPedEnviados(int numeroOrdenArray) {
+		String nif = datos.getClientes().getDato().get(numeroOrdenArray-1).getNif();
+		return lp.mostrarPedEnviados(nif, datos.getPedidos());
+	}
+	
+	public List<Pedido> mostrarPedPendientes(int numeroOrdenArray) {
+		String nif = datos.getClientes().getDato().get(numeroOrdenArray-1).getNif();
+		return lp.mostrarPedPendientes(nif, datos.getPedidos());
+	}
+	
 	public ListaClientes getLc() {
 		return lc;
 	}
