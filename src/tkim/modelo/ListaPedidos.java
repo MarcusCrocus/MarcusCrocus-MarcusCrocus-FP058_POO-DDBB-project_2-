@@ -13,9 +13,9 @@ public class ListaPedidos {
 		try {
 			float totalPedido = unidadesPedido*articulo.getPrecioVenta();
 			float gastosEnvio = articulo.getGastosEnvio();
-			float a = cliente.descuentoEnv();
+			float descuentoPremium = cliente.descuentoEnv();
 			if (cliente.tipoCliente().equals("Cliente Premium")) {
-				gastosEnvio *= totalPedido-(cliente.descuentoEnv()/100);
+				gastosEnvio -= (descuentoPremium*gastosEnvio)/100;
 				totalPedido += gastosEnvio;
 			}else {
 				totalPedido += gastosEnvio;
