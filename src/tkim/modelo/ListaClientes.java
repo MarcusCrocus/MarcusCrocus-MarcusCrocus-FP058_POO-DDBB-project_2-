@@ -18,7 +18,7 @@ public class ListaClientes extends Listas<Cliente> {
 					Cliente ClienteEstandar = new ClienteEstandar(nombre, domi, nif, mail);
 					listasClientes.addDato(ClienteEstandar);
 					
-					return "The Client was added: " + ClienteEstandar.getNif() +" "+ ClienteEstandar.getNombre();
+					return "El cliente ha ido añadido: " + ClienteEstandar.getNif() +" "+ ClienteEstandar.getNombre();
 			
 				case "2": 
 					
