@@ -116,7 +116,7 @@ public class OnlineStore {
 		System.out.println("Codigo: ");
 		codigo = teclado.nextLine();
 		if (contro.existeArticulo(codigo)) {
-			System.out.println("El codigo " + codigo + " de articulo ya existe\n");
+			System.out.println("El codigo " + codigo + " de articulo ya existe.");
 			addArticulo();
 		} else {
 
