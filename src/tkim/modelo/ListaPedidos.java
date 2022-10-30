@@ -65,13 +65,15 @@ public class ListaPedidos {
 
 				if (enviado_pendiente) {
 					p.getDato().remove(pedido);
-					resultado = "El pedido ha sido eliminado";
+					resultado = "El pedido ha sido eliminado";	
 				}
+				break;
 			}
 		}
 		return resultado;
 
 	}
+	
 
 	public List<Pedido> mostrarPedEnviados(String nif, Listas<Pedido> lped) {
 
