@@ -2,8 +2,7 @@ package tkim.modelo;
 
 public class ListaArticulos extends Listas<Articulo>{
 
-	public String addArticulo(String codigo, String descripcion, float precioVenta, float gastosEnvio, int tiempoPreparacion, Listas<Articulo> a)
-			throws Exception {
+	public String addArticulo(String codigo, String descripcion, float precioVenta, float gastosEnvio, int tiempoPreparacion, Listas<Articulo> a) {
 		
 		try {
 			Articulo articulo = new Articulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
