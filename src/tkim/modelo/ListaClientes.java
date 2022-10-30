@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ListaClientes extends Listas<Cliente> {
 	
-// una prueba
+
 	
 	public String anadirCliente(String nombre, String domi, String nif, String mail, String tipoCliente, Listas<Cliente> listasClientes) {
 		
@@ -18,14 +18,14 @@ public class ListaClientes extends Listas<Cliente> {
 					Cliente ClienteEstandar = new ClienteEstandar(nombre, domi, nif, mail);
 					listasClientes.addDato(ClienteEstandar);
 					
-					return "The Client was added: " + ClienteEstandar.getNif() +" "+ ClienteEstandar.getNombre();
+					return "El cliente ha ido añadido: " + ClienteEstandar.getNif() +" "+ ClienteEstandar.getNombre();
 			
 				case "2": 
 					
 					Cliente ClientePeremium = new ClientePremium(nombre, domi, nif, mail);
 					listasClientes.addDato(ClientePeremium);
 			
-					return "The Client was added: " + ClientePeremium.getNif() +" "+ ClientePeremium.getNombre(); 
+					return "El cliente ha ido añadido: " + ClientePeremium.getNif() +" "+ ClientePeremium.getNombre(); 
 					
 			}
 			return tipoCliente;

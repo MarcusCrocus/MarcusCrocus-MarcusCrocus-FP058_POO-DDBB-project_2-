@@ -73,12 +73,5 @@ public class Pedido {
 		return "Pedido [numeroPedido=" + numeroPedido + ", unidadesPedido=" + unidadesPedido + ", fechaHoraPedido="
 				+ fechaHoraPedido + ", totalPedido=" + totalPedido + ", cliente=" + cliente + ", articulo=" + articulo
 				+ "]";
-	}
-	
-	
-	
-	
-	
-	
-	
+	}	
 }
