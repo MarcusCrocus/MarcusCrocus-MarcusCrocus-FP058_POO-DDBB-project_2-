@@ -25,7 +25,7 @@ public class ListaClientes extends Listas<Cliente> {
 					Cliente ClientePeremium = new ClientePremium(nombre, domi, nif, mail);
 					listasClientes.addDato(ClientePeremium);
 			
-					return "The Client was added: " + ClientePeremium.getNif() +" "+ ClientePeremium.getNombre(); 
+					return "El cliente ha ido añadido: " + ClientePeremium.getNif() +" "+ ClientePeremium.getNombre(); 
 					
 			}
 			return tipoCliente;
