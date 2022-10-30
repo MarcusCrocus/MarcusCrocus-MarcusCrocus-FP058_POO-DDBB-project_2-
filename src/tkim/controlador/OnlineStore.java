@@ -183,6 +183,7 @@ public class OnlineStore {
 			tipoCliente = teclado.nextLine();
 		} while (!"12".contains(tipoCliente));
 		
+		
 		//Aqui enviaremos el nif, nombre, domicilio, email y tipo de cliente al controlador
 		
 		System.out.println(contro.addCliente(nombre, domicilio, nif, email, tipoCliente));
