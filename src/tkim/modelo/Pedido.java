@@ -1,8 +1,6 @@
 package tkim.modelo;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import tkim.modelo.Cliente;
 import tkim.modelo.Articulo;
 
@@ -75,12 +73,5 @@ public class Pedido {
 		return "Pedido [numeroPedido=" + numeroPedido + ", unidadesPedido=" + unidadesPedido + ", fechaHoraPedido="
 				+ fechaHoraPedido + ", totalPedido=" + totalPedido + ", cliente=" + cliente + ", articulo=" + articulo
 				+ "]";
-	}
-	
-	
-	
-	
-	
-	
-	
+	}	
 }
