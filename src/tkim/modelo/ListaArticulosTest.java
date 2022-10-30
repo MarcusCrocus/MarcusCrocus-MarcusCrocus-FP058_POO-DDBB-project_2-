@@ -12,7 +12,7 @@ class ListaArticulosTest {
 	Articulo articulo;
 
 	@Test
-	void testAddArticulo() throws Exception {
+	void testAddArticulo() {
 		la = new ListaArticulos();
 		c = new Controlador();
 		articulo = new Articulo("a4", "aa", 35.15f, 4.95f, 7200);
