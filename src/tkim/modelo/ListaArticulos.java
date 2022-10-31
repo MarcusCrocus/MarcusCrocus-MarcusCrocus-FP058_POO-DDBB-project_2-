@@ -6,7 +6,6 @@ public class ListaArticulos extends Listas<Articulo>{
 		
 		try {
 			Articulo articulo = new Articulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
-			
 			a.addDato(articulo);
 
 			return "El articulo ha sido añadido correctamente: " + articulo.getDescripcion();
