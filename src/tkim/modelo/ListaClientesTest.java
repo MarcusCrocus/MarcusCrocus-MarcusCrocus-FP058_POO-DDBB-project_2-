@@ -11,7 +11,7 @@ class ListaClientesTest {
 	Controlador ctrl;
 	ListaClientes listaClientes;
 	Cliente cliente;
-	//isracrocus
+
 	@Test
     void testAnadirClienteEstandar() {
         ctrl = new Controlador();
