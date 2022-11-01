@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import tkim.controlador.Controlador;
-//comentario isra
+
 class ListaPedidosTest {
 	Controlador c;
 	ListaPedidos lp;
