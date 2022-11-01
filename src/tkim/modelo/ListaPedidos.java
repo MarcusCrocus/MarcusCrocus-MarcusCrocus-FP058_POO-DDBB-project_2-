@@ -33,24 +33,14 @@ public class ListaPedidos {
 		return mensaje;
 	}
 
-	public ArrayList<Pedido> pedidosCliente(String nifCliente, Listas<Pedido> p) {
-		ArrayList<Pedido> pedidoXcliente = new ArrayList<>();
-		for (Pedido pedido : p.getDato()) {
-			if (pedido.getCliente().getNif().equals(nifCliente)) {
-
-			}
-		}
-		return pedidoXcliente;
-	}
-
 	public Boolean existePedido(int codigoPedido, Listas<Pedido> p) {
 		Boolean existeArticulo = false;
 		for (Pedido pedido : p.getDato()) {
 			if (pedido.getNumeroPedido() == (codigoPedido)) {
 				existeArticulo = true;
 			}
+			break;
 		}
-
 		return existeArticulo;
 	}
 
