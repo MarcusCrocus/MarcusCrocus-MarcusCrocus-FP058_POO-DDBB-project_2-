@@ -8,6 +8,7 @@ import tkim.modelo.Articulo;
 import tkim.modelo.Cliente;
 import tkim.modelo.ClienteEstandar;
 import tkim.modelo.ClientePremium;
+import tkim.modelo.Exceptions;
 import tkim.modelo.Pedido;
 
 public class OnlineStore {
@@ -30,17 +31,17 @@ public class OnlineStore {
 		boolean salir = false;
 		String opcio;
 		do {
-			System.out.println(" 1. Añadir artículo");
-			System.out.println(" 2. Mostrar artículos");
-			System.out.println(" 3. Añadir clientes");
+			System.out.println(" 1. Aï¿½adir artï¿½culo");
+			System.out.println(" 2. Mostrar artï¿½culos");
+			System.out.println(" 3. Aï¿½adir clientes");
 			System.out.println(" 4. Mostrar clientes");
 			System.out.println(" 5. Mostrar clientes estandar");
 			System.out.println(" 6. Mostrar clientes premium");
 			System.out.println(" 7. Crear pedido");
 			System.out.println(" 8. Eliminar pedido");
-			System.out.println(" 9. Mostrar pedidos cliente pendientes de envío");
+			System.out.println(" 9. Mostrar pedidos cliente pendientes de envï¿½o");
 			System.out.println("10. Mostrar pedidos cliente enviados");
-			System.out.println(" 0. Salir de la aplicación");
+			System.out.println(" 0. Salir de la aplicaciï¿½n");
 			opcio = pedirOpcioMenu();
 			switch (opcio) {
 			case "1":
@@ -96,7 +97,7 @@ public class OnlineStore {
 	String pedirOpcioMenu() {
 		String resp;
 		teclado = new Scanner(System.in);
-		System.out.print("Elige una opción (1,2,3,4,5,6,7,8,9,10 o 0 (Salir)): ");
+		System.out.print("Elige una opciï¿½n (1,2,3,4,5,6,7,8,9,10 o 0 (Salir)): ");
 		resp = teclado.nextLine();
 		if (resp.isEmpty()) {
 			resp = " ";
@@ -120,7 +121,7 @@ public class OnlineStore {
 			addArticulo();
 		} else {
 
-			System.out.println("Descripción: ");
+			System.out.println("Descripciï¿½n: ");
 			String descripcion = teclado.nextLine();
 
 			System.out.println("Precio de venta: ");
@@ -128,11 +129,26 @@ public class OnlineStore {
 
 			System.out.println("Gastos de envio: ");
 			float gastosEnvio = teclado.nextFloat();
+			 System.out.println("Tiempo de preparacion EN MINUTOS: ");
 
-			System.out.println("Tiempo de preparacion: ");
-			int tiempoPreparacion = teclado.nextInt();
+	            boolean prep = true;
+	            do{
+	                int tiempoPreparacion = teclado.nextInt();
+	                try{
 
-			System.out.println(contro.addArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion));
+	                    if (tiempoPreparacion < 120){
+	                        throw new Exceptions("El tiempo de preparaciÃ³n no puede ser inferior a 120min. Vuelve a introducirlo:");
+
+	                    } else {
+	                        System.out.println(contro.addArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion));
+	                        prep = false;}
+
+	                } catch (Exceptions e) {
+	                    System.out.println(e.getMessage());
+	                }
+
+	            } while(prep);
+	            
 			System.out.println("");
 			pausar();
 		}
@@ -174,8 +190,27 @@ public class OnlineStore {
 			System.out.println("Domicilio: ");
 			String domicilio = teclado.nextLine();
 
-			System.out.println("Email: ");
-			String email = teclado.nextLine();
+	        System.out.println("Email: ");
+	        
+	        String email;
+	        boolean bool = true;
+
+	        do{
+	              email = teclado.nextLine();
+	            try{
+
+	                if (!email.contains("@")){
+	                    throw new Exceptions("El email debe contener @. Vuelve a introducir su email:");
+
+	                } else {
+	                    System.out.println("El email ha sido aceptado");
+	                    bool = false;}
+
+	            } catch (Exceptions e) {
+	                System.out.println(e.getMessage());
+	            }
+
+	        } while(bool);
 
 			String tipoCliente;
 			System.out.println("Escoge el tipo de cliente: (1) Estandar (2) Premium");
@@ -267,8 +302,28 @@ public class OnlineStore {
 			System.out.println("Ya existe un pedido con ese codigo");
 			addPedido();
 		} else {
-			System.out.println("Unidades: ");
-			int unidadesPedido = Integer.parseInt(teclado.nextLine());
+			
+			  System.out.println("Unidades: ");
+			  int unidadesPedido ;
+
+		        boolean unid = true;
+
+		        do{
+		             unidadesPedido = Integer.parseInt(teclado.nextLine());
+		            try{
+
+		                if (unidadesPedido <= 0 || unidadesPedido > 10){
+		                    throw new Exceptions("El numero de unidades debe ser superior a 0 e inferior a 10. Vuelve a introducirlo:");
+
+		                } else {
+		                    System.out.println("El numero de unidades ha sido aceptado");
+		                    unid = false;}
+
+		            } catch (Exceptions e) {
+		                System.out.println(e.getMessage());
+		            }
+
+		        } while(unid);
 
 			System.out.println("Escoge el cliente del pedido.");
 			System.out.println("");
@@ -281,7 +336,7 @@ public class OnlineStore {
 
 			System.out.println("");
 			do {
-				System.out.println("Elige una opción (" + numeroClientes.substring(1) + "): ");
+				System.out.println("Elige una opciï¿½n (" + numeroClientes.substring(1) + "): ");
 				cli = teclado.nextLine();
 			} while (!numeroClientes.contains(cli));
 
@@ -296,7 +351,7 @@ public class OnlineStore {
 
 			System.out.println("");
 			do {
-				System.out.println("Elige una opción (" + numeroArticulos.substring(1) + "): ");
+				System.out.println("Elige una opciï¿½n (" + numeroArticulos.substring(1) + "): ");
 				art = teclado.nextLine();
 			} while (!numeroArticulos.contains(cli));
 
