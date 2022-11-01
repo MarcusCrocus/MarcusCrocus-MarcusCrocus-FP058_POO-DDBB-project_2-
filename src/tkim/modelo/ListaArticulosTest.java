@@ -34,10 +34,9 @@ class ListaArticulosTest {
 	void testExisteArticuloFalse() {
 		la = new ListaArticulos();
 		c = new Controlador();
-		articulo = new Articulo("a3", "armario", 35.15f, 4.95f, 7200);
+		articulo = new Articulo("a4", "armario", 35.15f, 4.95f, 7200);
 		c.getDatos().getArticulos().addDato(articulo);
-		assertTrue(la.existeArticulo("a4", c.getDatos().getArticulos()) == false);
-
+		assertFalse(la.existeArticulo("a4", c.getDatos().getArticulos()) == false);
 	}
 
 }
