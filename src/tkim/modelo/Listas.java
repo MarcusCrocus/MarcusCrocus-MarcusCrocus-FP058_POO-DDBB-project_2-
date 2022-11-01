@@ -23,22 +23,4 @@ public class Listas <T> {
 		datos.add(dato);
 	}
 
-
-
-
-
-	/*
-	 * public ArrayList<T> getDatos() { return datos; }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * public void setDatos(ArrayList<T> datos) { this.datos = datos; }
-	 */
-		
-	
-
-	
-	
 }
