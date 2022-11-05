@@ -39,7 +39,7 @@ public class ArticuloDAO implements IArticuloDAO {
 			ps.setInt(5, articulo.getTiempoPreparacion());
 			int resultado = ps.executeUpdate();
 			if (resultado==1) {
-				mensaje = "El articulo "+articulo.getDescripcion()+"ha sido introducido correctamente";
+				mensaje = "El articulo "+articulo.getDescripcion()+" ha sido introducido correctamente";
 			}
 			return mensaje;
 			
