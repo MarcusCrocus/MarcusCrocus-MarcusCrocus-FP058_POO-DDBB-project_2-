@@ -122,17 +122,35 @@ public class OnlineStore {
 
 			System.out.println("Descripción: ");
 			String descripcion = teclado.nextLine();
+			
+			String precioVenta;
+			do {
+				System.out.println("Precio de venta: ");
+				precioVenta = teclado.nextLine();
+			} while (!esFloat(precioVenta));
+			
+			String gastosEnvio;
+			do {
+				System.out.println("Gastos de envio: ");
+				gastosEnvio = teclado.nextLine();
+			} while (!esFloat(gastosEnvio));
 
-			System.out.println("Precio de venta: ");
-			float precioVenta = teclado.nextFloat();
+			String tiempoPreparacion;
+			do {
+				System.out.println("Tiempo de preparacion: ");
+				tiempoPreparacion = teclado.nextLine();
+			} while (!esInteger(tiempoPreparacion));
 
-			System.out.println("Gastos de envio: ");
-			float gastosEnvio = teclado.nextFloat();
-
-			System.out.println("Tiempo de preparacion: ");
-			int tiempoPreparacion = teclado.nextInt();
-
-			System.out.println(contro.addArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion));
+			
+			if (precioVenta.contains(",")) {
+				precioVenta = precioVenta.replace(",", ".");
+			}
+			
+			if (gastosEnvio.contains(",")) {
+				gastosEnvio = gastosEnvio.replace(",", ".");
+			}
+			
+			System.out.println(contro.addArticulo(codigo, descripcion, Float.parseFloat(precioVenta), Float.parseFloat(gastosEnvio), Integer.parseInt(tiempoPreparacion)));
 			System.out.println("");
 			pausar();
 		}
@@ -145,12 +163,17 @@ public class OnlineStore {
 		// Aqui guardaremos en un arraylist la lista de clientes que nos devolvera el
 		// controlador
 		// y despues lo mostraremos por pantalla con un foreach
-		for (Articulo articulo : contro.datos.getArticulos().getDato()) {
-			System.out.print("- Codigo: " + articulo.getCodigo() + " ");
-			System.out.print("Descripcion: " + articulo.getDescripcion() + " ");
-			System.out.print("Precio de venta: " + articulo.getPrecioVenta() + " ");
-			System.out.print("Gastos de envio: " + articulo.getGastosEnvio() + " ");
-			System.out.print("Tiempo de preparacion: " + articulo.getTiempoPreparacion() + "\n");
+		List<Articulo> articulos = contro.mostrarArticulos();
+		if (!articulos.isEmpty()) {
+			for (Articulo articulo : articulos) {
+				System.out.print("- Codigo: " + articulo.getCodigo() + " ");
+				System.out.print("Descripcion: " + articulo.getDescripcion() + " ");
+				System.out.print("Precio de venta: " + articulo.getPrecioVenta() + " ");
+				System.out.print("Gastos de envio: " + articulo.getGastosEnvio() + " ");
+				System.out.print("Tiempo de preparacion: " + articulo.getTiempoPreparacion() + "\n");
+			}
+		} else {
+			System.out.println("Ha habido algun fallo en a la hora de recuperar los datos");
 		}
 		pausar();
 	}
@@ -261,9 +284,14 @@ public class OnlineStore {
 		String numeroArticulos = "0";
 		String cli = "";
 		String art = "";
-		System.out.println("Numero de pedido: ");
-		int numeroPedido = Integer.parseInt(teclado.nextLine());
-		if (contro.existePedido(numeroPedido)) {
+		
+		String numeroPedido;
+		do {
+			System.out.println("Numero de pedido: ");
+			numeroPedido = teclado.nextLine();
+		} while (!esInteger(numeroPedido));
+		
+		if (contro.existePedido(Integer.parseInt(numeroPedido))) {
 			System.out.println("Ya existe un pedido con ese codigo");
 			addPedido();
 		} else {
@@ -300,7 +328,7 @@ public class OnlineStore {
 				art = teclado.nextLine();
 			} while (!numeroArticulos.contains(cli));
 
-			System.out.println(contro.addPedido(numeroPedido, unidadesPedido, LocalDateTime.now(), cli, art));
+			System.out.println(contro.addPedido(Integer.parseInt(numeroPedido), unidadesPedido, LocalDateTime.now(), cli, art));
 			System.out.println("");
 			pausar();
 		}
@@ -311,9 +339,13 @@ public class OnlineStore {
 	 */
 	void eliminarPedido() {
 		// Enviaremos al controlador el pedido que queremos eliminar
-		System.out.println("Pon el numero de pedido que quieres eliminar: ");
-		int numeroPedido = Integer.parseInt(teclado.nextLine());
-		System.out.println(contro.eliminarPedido(numeroPedido));
+		String numeroPedido;
+		do {
+			System.out.println("Numero de pedido: ");
+			numeroPedido = teclado.nextLine();
+		} while (!esInteger(numeroPedido));
+		
+		System.out.println(contro.eliminarPedido(Integer.parseInt(numeroPedido)));
 		System.out.println("");
 		pausar();
 	}
@@ -426,6 +458,9 @@ public class OnlineStore {
 	 */
 	boolean esFloat(String numero) {
 		try {
+			if (numero.contains(",")) {
+				numero = numero.replace(",", ".");
+			}
 			Float.parseFloat(numero);
 			return true;
 		} catch (NumberFormatException err) {

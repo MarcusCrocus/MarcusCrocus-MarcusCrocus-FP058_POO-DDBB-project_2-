@@ -6,6 +6,7 @@ import java.util.List;
 import tkim.modelo.Articulo;
 import tkim.modelo.Cliente;
 import tkim.modelo.Datos;
+import tkim.modelo.LanzarArticuloDAO;
 import tkim.modelo.ListaArticulos;
 import tkim.modelo.ListaClientes;
 import tkim.modelo.ListaPedidos;
@@ -17,6 +18,7 @@ public class Controlador {
 	ListaArticulos la = new ListaArticulos();
 	ListaPedidos lp = new ListaPedidos();
 	Datos datos = new Datos();
+	LanzarArticuloDAO lad = new LanzarArticuloDAO();
 	
 	public String addCliente(String nombre, String domi, String nif, String mail, String tipoCliente) {
 		try {
@@ -46,7 +48,7 @@ public class Controlador {
 	
 	public String addArticulo(String codigo, String descripcion, float precioVenta, float gastosEnvio, int tiempoPreparacion) {
 		try {
-			return la.addArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion, datos.getArticulos());
+			return lad.addArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
 		} catch (Exception e) {
 			e.printStackTrace();
 			
@@ -54,6 +56,10 @@ public class Controlador {
 		
 		return "hola";
 		
+	}
+	
+	public List<Articulo> mostrarArticulos(){
+		return lad.mostrarArticulos();
 	}
 	
 	public List<Cliente> mostrarClientesEstandar(){
@@ -66,7 +72,7 @@ public class Controlador {
 	}
 	
 	public Boolean existeArticulo(String codigo) {
-		return la.existeArticulo(codigo, datos.getArticulos());
+		return lad.existeArticulo(codigo);
 		
 	}
 	
