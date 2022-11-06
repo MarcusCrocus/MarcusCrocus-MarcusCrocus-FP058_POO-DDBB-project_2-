@@ -1,6 +1,8 @@
 package tkim.modelo;
 
 import tkim.dao.ArticuloDAO;
+import tkim.dao.ClienteDAO;
+import tkim.dao.PedidoDAO;
 
 public class FactoryDAOs {
 
@@ -8,10 +10,13 @@ public class FactoryDAOs {
 		
 	switch (tipo) {
 	case "Articulo":
-		return new ArticuloDAO();	
-
-	default: 
 		return new ArticuloDAO();
+	case "Cliente":
+		return new ClienteDAO();
+	case "Pedido":
+		return new PedidoDAO();
+	default: 
+		return null;
 		
 	}
 
