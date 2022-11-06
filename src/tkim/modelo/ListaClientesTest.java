@@ -1,42 +1,57 @@
 package tkim.modelo;
 
 import static org.junit.Assert.assertEquals;
-<<<<<<< HEAD
+
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
-=======
->>>>>>> isracrocus
+
 
 import org.junit.jupiter.api.Test;
 
 import tkim.controlador.Controlador;
 
 class ListaClientesTest {
-<<<<<<< HEAD
+
 
 	ListaClientes listaCli;
 	Cliente clientVar;
 	Controlador ctrl;
-
-	@Test
-	void testAnadirClienteEstandar() {
-
-		ctrl = new Controlador();
-		listaCli = new ListaClientes();
-
-		clientVar = new ClienteEstandar("Pepito", "Barcelona", "x78946", "pepito@gmail.com");
-
-		ctrl.getDatos().getClientes().addDato(clientVar);
-
 	
-		assertEquals("el return es correcto: ",
-				listaCli.anadirCliente("Pepito", "Barcelona", "x78946", "pepito@gmail.com", "1",
-						ctrl.getDatos().getClientes()),
-				"El cliente ha ido añadido: " + clientVar.getNif() + " " + clientVar.getNombre());
-	}
+
+	@Test 
+    void testAnadirClienteEstandar() {
+		
+		//isra correction
+        ctrl = new Controlador();
+        listaCli = new ListaClientes();
+        
+        
+        clientVar = new ClienteEstandar("pepito", "Barcelona", "x78946", "ajf;lad@kajf.com");
+        ctrl.getDatos().getClientes().addDato(clientVar);
+ 
+        assertEquals("el return no es correcto: ", listaCli.anadirCliente("pepito", "Barcelona", "x78946", "ajf;lad@kajf.com", "1", ctrl.getDatos().getClientes()), "El cliente ha ido añadido: " + clientVar.getNif() +" "+ clientVar.getNombre());
+    }
+
+
+//	@Test
+//	void testAnadirClienteEstandar() {
+//
+//		ctrl = new Controlador();
+//		listaCli = new ListaClientes();
+//
+//		clientVar = new ClienteEstandar("Pepito", "Barcelona", "x78946", "pepito@gmail.com");
+//
+//		ctrl.getDatos().getClientes().addDato(clientVar);
+//
+//	
+//		assertEquals("el return es correcto: ",
+//				listaCli.anadirCliente("Pepito", "Barcelona", "x78946", "pepito@gmail.com", "1",
+//						ctrl.getDatos().getClientes()),
+//				"El cliente ha ido añadido: " + clientVar.getNif() + " " + clientVar.getNombre());
+//	}
 
 	@Test
 	void testAnadirClientePremium() {
@@ -118,21 +133,6 @@ class ListaClientesTest {
 	      
 		}
 
-=======
-	Controlador ctrl;
-	ListaClientes listaClientes;
-	Cliente cliente;
 
-	@Test
-    void testAnadirClienteEstandar() {
-        ctrl = new Controlador();
-        listaClientes = new ListaClientes();
-        
-        
-        cliente = new ClienteEstandar("pepito", "Barcelona", "x78946", "ajf;lad@kajf.com");
-        ctrl.getDatos().getClientes().addDato(cliente);
- 
-        assertEquals("el return no es correcto: ", listaClientes.anadirCliente("pepito", "Barcelona", "x78946", "ajf;lad@kajf.com", "1", ctrl.getDatos().getClientes()), "El cliente ha ido añadido: " + cliente.getNif() +" "+ cliente.getNombre());
-    }
->>>>>>> isracrocus
+
 }
