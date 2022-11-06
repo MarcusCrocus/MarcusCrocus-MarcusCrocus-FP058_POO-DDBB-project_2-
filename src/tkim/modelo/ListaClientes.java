@@ -18,21 +18,20 @@ public class ListaClientes extends Listas<Cliente> {
 					Cliente ClienteEstandar = new ClienteEstandar(nombre, domi, nif, mail);
 					listasClientes.addDato(ClienteEstandar);
 					
-					return "El cliente ha ido añadido: " + ClienteEstandar.getNif() +" "+ ClienteEstandar.getNombre();
+					return "El cliente ha ido aÃ±adido: " + ClienteEstandar.getNif() +" "+ ClienteEstandar.getNombre();
 			
 				case "2": 
 					
 					Cliente ClientePeremium = new ClientePremium(nombre, domi, nif, mail);
 					listasClientes.addDato(ClientePeremium);
 			
-					return "El cliente ha ido añadido: " + ClientePeremium.getNif() +" "+ ClientePeremium.getNombre(); 
+					return "El cliente ha ido aÃ±adido: " + ClientePeremium.getNif() +" "+ ClientePeremium.getNombre(); 
 					
 			}
 			return tipoCliente;
 	}
 
 	// Metodo para comprobar si cliente existe
-	
 	public boolean existeCliente(String nif,Listas<Cliente> cli) {
 			
 			
