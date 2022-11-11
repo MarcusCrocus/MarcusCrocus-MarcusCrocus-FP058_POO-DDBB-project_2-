@@ -97,40 +97,40 @@ class ListaClientesTest {
 	}
 
 
-	@Test
-	void testMostrarClienteEstandar() {
-		ctrl = new Controlador();
-		listaCli = new ListaClientes();
-
-		clientVar = new ClienteEstandar("test", "Barcelona", "x78946", "pepito@gmail.com");
-		ctrl.getDatos().addCliente(clientVar);
-
-		List<Cliente> cli = new ArrayList<>();
-		
-			for (Cliente cliente : ctrl.getDatos().getClientes().getDato()) {
-					cli.add(cliente);
-			}
-
-			assertEquals(cli, listaCli.mostrarClienteEstandar(ctrl.getDatos().getClientes()));
-			
-	}
-
-	  @Test 
-	  void testMostrarClientePremium() {
-		  
-		  ctrl = new Controlador(); 
-		  listaCli = new ListaClientes();
-		  
-		  List<Cliente> cli = new ArrayList<>();
-		  
-		  clientVar = new ClientePremium("Pepito", "Barcelona", "x78946", "pepito@gmail.com"); 
-		  ctrl.getDatos().addCliente(clientVar); //lista generica
-		  
-	      cli.add(clientVar);
-	      
-	      assertEquals(cli, listaCli.mostrarClientePremium(ctrl.getDatos().getClientes()));
-	      
-		}
+//	@Test
+//	void testMostrarClienteEstandar() {
+//		ctrl = new Controlador();
+//		listaCli = new ListaClientes();
+//
+//		clientVar = new ClienteEstandar("test", "Barcelona", "x78946", "pepito@gmail.com");
+//		ctrl.getDatos().addCliente(clientVar);
+//
+//		List<Cliente> cli = new ArrayList<>();
+//		
+//			for (Cliente cliente : ctrl.getDatos().getClientes().getDato()) {
+//					cli.add(cliente);
+//			}
+//
+//			assertEquals(cli, listaCli.mostrarClienteEstandar(ctrl.getDatos().getClientes()));
+//			
+//	}
+//
+//	  @Test 
+//	  void testMostrarClientePremium() {
+//		  
+//		  ctrl = new Controlador(); 
+//		  listaCli = new ListaClientes();
+//		  
+//		  List<Cliente> cli = new ArrayList<>();
+//		  
+//		  clientVar = new ClientePremium("Pepito", "Barcelona", "x78946", "pepito@gmail.com"); 
+//		  ctrl.getDatos().addCliente(clientVar); //lista generica
+//		  
+//	      cli.add(clientVar);
+//	      
+//	      assertEquals(cli, listaCli.mostrarClientePremium(ctrl.getDatos().getClientes()));
+//	      
+//		}
 
 
 

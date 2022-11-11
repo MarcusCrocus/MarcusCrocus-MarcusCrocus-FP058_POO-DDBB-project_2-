@@ -30,17 +30,17 @@ public class OnlineStore {
 		boolean salir = false;
 		String opcio;
 		do {
-			System.out.println(" 1. Añadir artículo");
-			System.out.println(" 2. Mostrar artículos");
-			System.out.println(" 3. Añadir clientes");
+			System.out.println(" 1. AÃ±adir articulo");
+			System.out.println(" 2. Mostrar articulos");
+			System.out.println(" 3. AÃ±adir clientes");
 			System.out.println(" 4. Mostrar clientes");
 			System.out.println(" 5. Mostrar clientes estandar");
 			System.out.println(" 6. Mostrar clientes premium");
 			System.out.println(" 7. Crear pedido");
 			System.out.println(" 8. Eliminar pedido");
-			System.out.println(" 9. Mostrar pedidos cliente pendientes de envío");
+			System.out.println(" 9. Mostrar pedidos cliente pendientes de envio");
 			System.out.println("10. Mostrar pedidos cliente enviados");
-			System.out.println(" 0. Salir de la aplicación");
+			System.out.println(" 0. Salir de la aplicacion");
 			opcio = pedirOpcioMenu();
 			switch (opcio) {
 			case "1":
@@ -96,7 +96,7 @@ public class OnlineStore {
 	String pedirOpcioMenu() {
 		String resp;
 		teclado = new Scanner(System.in);
-		System.out.print("Elige una opción (1,2,3,4,5,6,7,8,9,10 o 0 (Salir)): ");
+		System.out.print("Elige una opciï¿½n (1,2,3,4,5,6,7,8,9,10 o 0 (Salir)): ");
 		resp = teclado.nextLine();
 		if (resp.isEmpty()) {
 			resp = " ";
@@ -119,7 +119,7 @@ public class OnlineStore {
 			addArticulo();
 		} else {
 
-			System.out.println("Descripción: ");
+			System.out.println("Descripciï¿½n: ");
 			String descripcion = teclado.nextLine();
 			
 			String precioVenta;
@@ -252,6 +252,8 @@ public class OnlineStore {
 		System.out.println("######################## CLIENTES ESTANDAR ###############################");
 		System.out.println("##########################################################################");
 		System.out.println("");
+
+		
 		pausar();
 	}
 
@@ -308,7 +310,7 @@ public class OnlineStore {
 
 			System.out.println("");
 			do {
-				System.out.println("Elige una opción (" + numeroClientes.substring(1) + "): ");
+				System.out.println("Elige una opciï¿½n (" + numeroClientes.substring(1) + "): ");
 				cli = teclado.nextLine();
 			} while (!numeroClientes.contains(cli));
 
@@ -323,7 +325,7 @@ public class OnlineStore {
 
 			System.out.println("");
 			do {
-				System.out.println("Elige una opción (" + numeroArticulos.substring(1) + "): ");
+				System.out.println("Elige una opciï¿½n (" + numeroArticulos.substring(1) + "): ");
 				art = teclado.nextLine();
 			} while (!numeroArticulos.contains(cli));
 

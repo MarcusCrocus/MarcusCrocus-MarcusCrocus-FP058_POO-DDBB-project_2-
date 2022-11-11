@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListaClientes extends Listas<Cliente> {
-	
+	 
 
 	
 	public String anadirCliente(String nombre, String domi, String nif, String mail, String tipoCliente, Listas<Cliente> listasClientes) {
@@ -79,7 +79,36 @@ public class ListaClientes extends Listas<Cliente> {
 
 			return showClientesPremium;
 		}
-
-
+		
+//		public List<Cliente> mostrarClientes(Listas<Cliente> cli,String tipo){
+//				
+//			List<Cliente> todosClientes = new ArrayList<>();
+//			
+//				 				
+//					switch(tipo) {
+//					
+//					
+//					case "1":
+//						for (Cliente var : cli.getDato()) {
+//							if (var.tipoCliente() == "Cliente Estandar") {
+//								todosClientes.add(var);	
+//							}
+//							
+//						}
+//						break;
+//					case "2":
+//						for (Cliente var : cli.getDato()) {
+//							if (var.tipoCliente() == "Cliente Premium"){
+//								todosClientes.add(var);
+//							}
+//							
+//						}
+//		
+//					}
+//		return todosClientes;
+//
+//		}
+		
+		
 }
 

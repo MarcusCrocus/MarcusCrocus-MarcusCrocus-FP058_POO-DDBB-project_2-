@@ -20,7 +20,7 @@ public class ArticuloDAO implements IArticuloDAO {
             System.err.println("ERROR: failed to load HSQLDB JDBC driver.");
             e.printStackTrace();
         }
-    }
+    } 
 
 
 	@Override

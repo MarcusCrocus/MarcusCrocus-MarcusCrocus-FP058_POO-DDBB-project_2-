@@ -7,6 +7,7 @@ import tkim.modelo.Articulo;
 import tkim.modelo.Cliente;
 import tkim.modelo.Datos;
 import tkim.modelo.LanzarArticuloDAO;
+import tkim.modelo.LanzarClienteDAO;
 import tkim.modelo.ListaArticulos;
 import tkim.modelo.ListaClientes;
 import tkim.modelo.ListaPedidos;
@@ -20,8 +21,11 @@ public class Controlador {
 	Datos datos = new Datos();
 	LanzarArticuloDAO lad = new LanzarArticuloDAO();
 	
+	LanzarClienteDAO lac = new LanzarClienteDAO();
+	
 	public String addCliente(String nombre, String domi, String nif, String mail, String tipoCliente) {
 		try {
+			
 			return lc.anadirCliente(nombre,domi,nif, mail, tipoCliente, datos.getClientes());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,6 +61,29 @@ public class Controlador {
 		return "hola";
 		
 	}
+	
+	//Clientes
+	
+	public String anadirClientesDAO(String nombre, String domi, String nif, String mail, String tipoCliente){
+		try {
+			return lac.anadirClientesDAO(nombre, domi, nif,mail,tipoCliente);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return tipoCliente;
+		
+	}
+	
+	public Boolean existeClienteDAO(String nif){
+		return lac.existeCliente(nif);
+	}
+	
+	public List<Cliente> mostrarClienteDAO(){
+		return lac.mostrarClientesDAO();
+	}
+	
+	
+	
 	
 	public List<Articulo> mostrarArticulos(){
 		return lad.mostrarArticulos();
@@ -99,7 +126,7 @@ public class Controlador {
 		String nif = datos.getClientes().getDato().get(numeroOrdenArray-1).getNif();
 		return lp.mostrarPedPendientes(nif, datos.getPedidos());
 	}
-	
+
 	public ListaClientes getLc() {
 		return lc;
 	}
@@ -131,6 +158,54 @@ public class Controlador {
 	public void setDatos(Datos datos) {
 		this.datos = datos;
 	}
+
+	public LanzarArticuloDAO getLad() {
+		return lad;
+	}
+
+	public void setLad(LanzarArticuloDAO lad) {
+		this.lad = lad;
+	}
+
+	public LanzarClienteDAO getLac() {
+		return lac;
+	}
+
+	public void setLac(LanzarClienteDAO lac) {
+		this.lac = lac;
+	}
+	
+//	public ListaClientes getLc() {
+//		return lc;
+//	}
+//
+//	public void setLc(ListaClientes lc) {
+//		this.lc = lc;
+//	}
+//
+//	public ListaArticulos getLa() {
+//		return la;
+//	}
+//
+//	public void setLa(ListaArticulos la) {
+//		this.la = la;
+//	}
+//
+//	public ListaPedidos getLp() {
+//		return lp;
+//	}
+//
+//	public void setLp(ListaPedidos lp) {
+//		this.lp = lp;
+//	}
+//
+//	public Datos getDatos() {
+//		return datos;
+//	}
+//
+//	public void setDatos(Datos datos) {
+//		this.datos = datos;
+//	}
 
 	
 }
