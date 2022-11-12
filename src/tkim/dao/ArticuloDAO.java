@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import tkim.clasesEstaticas.QuerysEstaticas;
 import tkim.modelo.Articulo;
 
@@ -139,5 +140,4 @@ public class ArticuloDAO implements IArticuloDAO {
 			}
 		}
 	}
-
 }
