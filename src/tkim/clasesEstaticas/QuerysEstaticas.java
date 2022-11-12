@@ -5,7 +5,7 @@ public class QuerysEstaticas {
 	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 	static final String DB_USER = "usuario_uoc";
     static final String DB_PASS = "4321";
-    static final String DB_URL = "jdbc:mysql://localhost:2211/poo_uoc?user=" + DB_USER + "&password=" + DB_PASS +"&serverTimezone=UTC";
+    static final String DB_URL = "jdbc:mysql://localhost:3308/poo_uoc?user=" + DB_USER + "&password=" + DB_PASS +"&serverTimezone=UTC";
     static final String INSERT = 
     		"INSERT INTO poo_uoc.ARTICULOS (codigo_articulo, descripcion, precio_venta, gastos_envio, tiempo_preparacion) "
     		+ "values (?, ?, ?, ?, ?)";
@@ -16,27 +16,86 @@ public class QuerysEstaticas {
     static final String SELECPEDIDOSPENDIENTES = 
     		"SELECT codigo_articulo FROM ARTICULOS WHERE CODIGO_ARTICULO = ? ORDER BY CODIGO_ARTICULO ASC";
     
+    
+    static final String INSERTCLIENTE = 
+    		"INSERT INTO poo_uoc.CLIENTES (nif, nombre, domicilio, email, tipo_cliente, cuota_anual, descuento_envio)" 
+    + "value (?,?, ?, ?, ?, ?, ?)";
+    
+    static final String SELECTEXISTECLIENTE =
+    		"SELECT nif FROM poo_uoc.CLIENTES WHERE NIF = ?";
+    
+    static final String SELECTTIPOCLIENTE = 
+    		"SELECT tipo_cliente FROM poo_uoc.CLIENTES WHERE tipo_cliente = ?";
+    
+
 	public static String getJdbcDriver() {
 		return JDBC_DRIVER;
 	}
+
 	public static String getDbUser() {
 		return DB_USER;
 	}
+
 	public static String getDbPass() {
 		return DB_PASS;
 	}
+
 	public static String getDbUrl() {
 		return DB_URL;
 	}
+
 	public static String getInsert() {
 		return INSERT;
 	}
+
 	public static String getSelectall() {
 		return SELECTALL;
 	}
+
 	public static String getSelecexiste() {
 		return SELECEXISTE;
 	}
+
+	public static String getSelecpedidospendientes() {
+		return SELECPEDIDOSPENDIENTES;
+	}
+
+	public static String getInsertcliente() {
+		return INSERTCLIENTE;
+	}
+
+	public static String getSelectexistecliente() {
+		return SELECTEXISTECLIENTE;
+	}
+
+	public static String getSelecttipocliente() {
+		return SELECTTIPOCLIENTE;
+	}
+
+	
+    
+    
+//	public static String getJdbcDriver() {
+//		return JDBC_DRIVER;
+//	}
+//	public static String getDbUser() {
+//		return DB_USER;
+//	}
+//	public static String getDbPass() {
+//		return DB_PASS;
+//	}
+//	public static String getDbUrl() {
+//		return DB_URL;
+//	}
+//	public static String getInsert() {
+//		return INSERT;
+//	}
+//	public static String getSelectall() {
+//		return SELECTALL;
+//	}
+//	public static String getSelecexiste() {
+//		return SELECEXISTE;
+//	}
     
     
 }
