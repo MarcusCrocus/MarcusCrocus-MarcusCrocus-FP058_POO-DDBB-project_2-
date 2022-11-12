@@ -267,7 +267,7 @@ public class OnlineStore {
 		System.out.println("######################## CLIENTES ESTANDAR ###############################");
 		System.out.println("##########################################################################");
 		System.out.println("");
-		for (Cliente cliente : contro.mostrarClientesEstandar()) {
+		for (Cliente cliente : contro.mostrarClientes()) {
 			System.out.println(cliente.getNombre() + "\n");
 		}
 		System.out.println("");
@@ -286,7 +286,7 @@ public class OnlineStore {
 		System.out.println("######################## CLIENTES PREMIUM ###############################");
 		System.out.println("##########################################################################");
 		System.out.println("");
-		for (Cliente cliente : contro.mostrarClientesPremium()) {
+		for (Cliente cliente : contro.mostrarClientes()) {
 			System.out.println(cliente.getNombre() + "\n");
 		}
 		System.out.println("");
