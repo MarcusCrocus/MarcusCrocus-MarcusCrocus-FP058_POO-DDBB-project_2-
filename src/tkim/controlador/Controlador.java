@@ -5,36 +5,30 @@ import java.util.List;
 
 import tkim.modelo.Articulo;
 import tkim.modelo.Cliente;
-import tkim.modelo.Datos;
-import tkim.modelo.ListaArticulos;
-import tkim.modelo.ListaClientes;
-import tkim.modelo.ListaPedidos;
+import tkim.modelo.LanzarArticuloDAO;
+import tkim.modelo.LanzarClienteDAO;
+import tkim.modelo.LanzarPedidoDAO;
 import tkim.modelo.Pedido;
 
 public class Controlador {
+	LanzarPedidoDAO lpd = new LanzarPedidoDAO();
+	LanzarClienteDAO lcd = new LanzarClienteDAO();
+	LanzarArticuloDAO lad = new LanzarArticuloDAO();
 	
-	ListaClientes lc = new ListaClientes();
-	ListaArticulos la = new ListaArticulos();
-	ListaPedidos lp = new ListaPedidos();
-	Datos datos = new Datos();
-	
-	public String addCliente(String nombre, String domi, String nif, String mail, String tipoCliente) {
+	public String addCliente(String nif, String nombre, String domi, String mail, String tipoCliente) {
 		try {
-			return lc.anadirCliente(nombre,domi,nif, mail, tipoCliente, datos.getClientes());
+			return lcd.anadirClientes(nif, nombre, domi, mail, tipoCliente);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
-		}
-		
-		
-		
+		}	
 	}
 	
-	public String addPedido(int numeroPedido, int unidadesPedido, LocalDateTime fechaHoraPedido, String cliente, String art) {
+	public String addPedido(int numeroPedido, int unidadesPedido, LocalDateTime fechaHoraPedido, String nif, String codigo_articulo) {
 		try {
-			Cliente c = datos.getClientes().getDato().get(Integer.parseInt(cliente)-1);
-			Articulo a = datos.getArticulos().getDato().get(Integer.parseInt(art) - 1);
-			return lp.addPedido(numeroPedido, unidadesPedido, fechaHoraPedido, c, a, datos.getPedidos());
+			Cliente c = lcd.buscarCliente(nif);
+			Articulo a = lad.buscarArticulo(codigo_articulo);
+			return lpd.addPedido(numeroPedido, unidadesPedido, fechaHoraPedido, c, a);
 		} catch (Exception e) {
 			e.printStackTrace();
 			
@@ -46,7 +40,7 @@ public class Controlador {
 	
 	public String addArticulo(String codigo, String descripcion, float precioVenta, float gastosEnvio, int tiempoPreparacion) {
 		try {
-			return la.addArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion, datos.getArticulos());
+			return lad.addArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
 		} catch (Exception e) {
 			e.printStackTrace();
 			
@@ -56,75 +50,70 @@ public class Controlador {
 		
 	}
 	
-	public List<Cliente> mostrarClientesEstandar(){
-		return lc.mostrarClienteEstandar(datos.getClientes());	
+	public List<Articulo> mostrarArticulos(){
+		return lad.mostrarArticulos();
 	}
 	
-	public List<Cliente> mostrarClientesPremium(){
-		return lc.mostrarClientePremium(datos.getClientes());
-		
+	public List<Cliente> mostrarClientesTodos(){
+		return lcd.mostrarClientesTodos();	
+	}
+	
+	public List<Cliente> mostrarClientesXtipo(String tipoCliente){
+		return lcd.mostrarClientesXtipo(tipoCliente);	
 	}
 	
 	public Boolean existeArticulo(String codigo) {
-		return la.existeArticulo(codigo, datos.getArticulos());
+		return lad.existeArticulo(codigo);
 		
 	}
 	
 	public Boolean existeCliente(String nif) {
-		return lc.existeCliente(nif, datos.getClientes());
+		return lcd.existeCliente(nif);
 		
 	}
 	
 	public Boolean existePedido(int codigoPedido) {
-		return lp.existePedido(codigoPedido, datos.getPedidos());
+		return lpd.existePedido(codigoPedido);
 		
 	}
 	
 	public String eliminarPedido(int codigoPedido) {
-		return lp.eliminarPedido(codigoPedido, datos.getPedidos());
+		return lpd.eliminarPedido(codigoPedido);
 	}
 	
 	public List<Pedido> mostrarPedEnviados(int numeroOrdenArray) {
-		String nif = datos.getClientes().getDato().get(numeroOrdenArray-1).getNif();
-		return lp.mostrarPedEnviados(nif, datos.getPedidos());
+		//String nif = datos.getClientes().getDato().get(numeroOrdenArray-1).getNif();
+		//return lpd.mostrarPedEnviados(nif);
+		return null;
 	}
 	
 	public List<Pedido> mostrarPedPendientes(int numeroOrdenArray) {
-		String nif = datos.getClientes().getDato().get(numeroOrdenArray-1).getNif();
-		return lp.mostrarPedPendientes(nif, datos.getPedidos());
-	}
-	
-	public ListaClientes getLc() {
-		return lc;
+		//String nif = datos.getClientes().getDato().get(numeroOrdenArray-1).getNif();
+		//return lpd.mostrarPedPendientes(nif);
+		return null;
 	}
 
-	public void setLc(ListaClientes lc) {
-		this.lc = lc;
+	public LanzarPedidoDAO getLpd() {
+		return lpd;
 	}
 
-	public ListaArticulos getLa() {
-		return la;
+	public void setLpd(LanzarPedidoDAO lpd) {
+		this.lpd = lpd;
 	}
 
-	public void setLa(ListaArticulos la) {
-		this.la = la;
+	public LanzarClienteDAO getLcd() {
+		return lcd;
 	}
 
-	public ListaPedidos getLp() {
-		return lp;
+	public void setLcd(LanzarClienteDAO lcd) {
+		this.lcd = lcd;
 	}
 
-	public void setLp(ListaPedidos lp) {
-		this.lp = lp;
+	public LanzarArticuloDAO getLad() {
+		return lad;
 	}
 
-	public Datos getDatos() {
-		return datos;
+	public void setLad(LanzarArticuloDAO lad) {
+		this.lad = lad;
 	}
-
-	public void setDatos(Datos datos) {
-		this.datos = datos;
-	}
-
-	
 }

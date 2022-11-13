@@ -8,7 +8,9 @@ import tkim.modelo.Articulo;
 import tkim.modelo.Cliente;
 import tkim.modelo.ClienteEstandar;
 import tkim.modelo.ClientePremium;
+import tkim.modelo.Exceptions;
 import tkim.modelo.Pedido;
+
 
 public class OnlineStore {
 
@@ -30,17 +32,17 @@ public class OnlineStore {
 		boolean salir = false;
 		String opcio;
 		do {
-			System.out.println(" 1. A馻dir art韈ulo");
-			System.out.println(" 2. Mostrar art韈ulos");
-			System.out.println(" 3. A馻dir clientes");
+			System.out.println(" 1. A帽adir art铆culo");
+			System.out.println(" 2. Mostrar art铆culos");
+			System.out.println(" 3. A帽adir clientes");
 			System.out.println(" 4. Mostrar clientes");
 			System.out.println(" 5. Mostrar clientes estandar");
 			System.out.println(" 6. Mostrar clientes premium");
 			System.out.println(" 7. Crear pedido");
 			System.out.println(" 8. Eliminar pedido");
-			System.out.println(" 9. Mostrar pedidos cliente pendientes de env韔");
+			System.out.println(" 9. Mostrar pedidos cliente pendientes de env铆o");
 			System.out.println("10. Mostrar pedidos cliente enviados");
-			System.out.println(" 0. Salir de la aplicaci髇");
+			System.out.println(" 0. Salir de la aplicaci贸n");
 			opcio = pedirOpcioMenu();
 			switch (opcio) {
 			case "1":
@@ -84,7 +86,6 @@ public class OnlineStore {
 		do {
 			System.out.println("Presiona intro para ir al menu principal...");
 			entrada = teclado.nextLine();
-			System.out.println(entrada);
 		} while (!entrada.equals(""));
 	}
 
@@ -96,7 +97,7 @@ public class OnlineStore {
 	String pedirOpcioMenu() {
 		String resp;
 		teclado = new Scanner(System.in);
-		System.out.print("Elige una opci髇 (1,2,3,4,5,6,7,8,9,10 o 0 (Salir)): ");
+		System.out.print("Elige una opci贸n (1,2,3,4,5,6,7,8,9,10 o 0 (Salir)): ");
 		resp = teclado.nextLine();
 		if (resp.isEmpty()) {
 			resp = " ";
@@ -112,27 +113,48 @@ public class OnlineStore {
 	 */
 	void addArticulo() {
 
-		String codigo;
-		System.out.println("Codigo: ");
-		codigo = teclado.nextLine();
+		System.out.println("Introduce codigo de articulo: ");
+		String codigo = teclado.nextLine();
 		if (contro.existeArticulo(codigo)) {
-			System.out.println("El codigo " + codigo + " de articulo ya existe.");
+			System.out.println("El articulo con el codigo "+codigo+",ya existe");
 			addArticulo();
 		} else {
 
-			System.out.println("Descripci髇: ");
+			System.out.println("Descripci贸n: ");
 			String descripcion = teclado.nextLine();
+			
+			String precioVenta;
+			do {
+				System.out.println("Precio de venta: ");
+				precioVenta = teclado.nextLine();
+			} while (!esFloat(precioVenta));
+			
+			String gastosEnvio;
+			do {
+				System.out.println("Gastos de envio: ");
+				gastosEnvio = teclado.nextLine();
+			} while (!esFloat(gastosEnvio));
 
-			System.out.println("Precio de venta: ");
-			float precioVenta = teclado.nextFloat();
+			System.out.println("Tiempo de preparacion EN MINUTOS: ");
+			boolean prep = true;
+			int tiempoPreparacion;
+            do{
+                tiempoPreparacion = teclado.nextInt();
+                try{
 
-			System.out.println("Gastos de envio: ");
-			float gastosEnvio = teclado.nextFloat();
+                    if (tiempoPreparacion < 120){
+                        throw new Exceptions("El tiempo de preparaci贸n no puede ser inferior a 120min. Vuelve a introducirlo:");
 
-			System.out.println("Tiempo de preparacion: ");
-			int tiempoPreparacion = teclado.nextInt();
+                    } else {
+                        System.out.println(contro.addArticulo(codigo, descripcion, Float.parseFloat(precioVenta), Float.parseFloat(gastosEnvio), tiempoPreparacion));
+                        prep = false;}
 
-			System.out.println(contro.addArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion));
+                } catch (Exceptions e) {
+                    System.out.println(e.getMessage());
+                }
+
+            } while(prep);
+
 			System.out.println("");
 			pausar();
 		}
@@ -145,12 +167,17 @@ public class OnlineStore {
 		// Aqui guardaremos en un arraylist la lista de clientes que nos devolvera el
 		// controlador
 		// y despues lo mostraremos por pantalla con un foreach
-		for (Articulo articulo : contro.datos.getArticulos().getDato()) {
-			System.out.print("- Codigo: " + articulo.getCodigo() + " ");
-			System.out.print("Descripcion: " + articulo.getDescripcion() + " ");
-			System.out.print("Precio de venta: " + articulo.getPrecioVenta() + " ");
-			System.out.print("Gastos de envio: " + articulo.getGastosEnvio() + " ");
-			System.out.print("Tiempo de preparacion: " + articulo.getTiempoPreparacion() + "\n");
+		List<Articulo> articulos = contro.mostrarArticulos();
+		if (!articulos.isEmpty()) {
+			for (Articulo articulo : articulos) {
+				System.out.print("- Codigo: " + articulo.getCodigo() + " ");
+				System.out.print("Descripcion: " + articulo.getDescripcion() + " ");
+				System.out.print("Precio de venta: " + articulo.getPrecioVenta() + " ");
+				System.out.print("Gastos de envio: " + articulo.getGastosEnvio() + " ");
+				System.out.print("Tiempo de preparacion: " + articulo.getTiempoPreparacion() + "\n");
+			}
+		} else {
+			System.out.println("Ha habido algun fallo en a la hora de recuperar los datos");
 		}
 		pausar();
 	}
@@ -173,9 +200,27 @@ public class OnlineStore {
 
 			System.out.println("Domicilio: ");
 			String domicilio = teclado.nextLine();
-
+			
 			System.out.println("Email: ");
-			String email = teclado.nextLine();
+			String email;
+	        boolean bool = true;
+
+	        do{
+	              email = teclado.nextLine();
+	            try{
+
+	                if (!email.contains("@")){
+	                    throw new Exceptions("El email debe contener @. Vuelve a introducir su email:");
+
+	                } else {
+	                    System.out.println("El email ha sido aceptado");
+	                    bool = false;}
+
+	            } catch (Exceptions e) {
+	                System.out.println(e.getMessage());
+	            }
+
+	        } while(bool);
 
 			String tipoCliente;
 			System.out.println("Escoge el tipo de cliente: (1) Estandar (2) Premium");
@@ -186,7 +231,7 @@ public class OnlineStore {
 			// Aqui enviaremos el nif, nombre, domicilio, email y tipo de cliente al
 			// controlador
 
-			System.out.println(contro.addCliente(nombre, domicilio, nif, email, tipoCliente));
+			System.out.println(contro.addCliente(nif, nombre, domicilio, email, tipoCliente));
 			System.out.println("");
 			pausar();
 		}
@@ -203,7 +248,7 @@ public class OnlineStore {
 		System.out.println("############################# CLIENTES ###################################");
 		System.out.println("##########################################################################");
 		System.out.println("");
-		for (Cliente cliente : contro.datos.getClientes().getDato()) {
+		for (Cliente cliente : contro.mostrarClientesTodos()) {
 			System.out.println(cliente + "\n");
 		}
 		System.out.println("");
@@ -222,7 +267,7 @@ public class OnlineStore {
 		System.out.println("######################## CLIENTES ESTANDAR ###############################");
 		System.out.println("##########################################################################");
 		System.out.println("");
-		for (Cliente cliente : contro.mostrarClientesEstandar()) {
+		for (Cliente cliente : contro.mostrarClientesXtipo("Cliente Estandar")) {
 			System.out.println(cliente.getNombre() + "\n");
 		}
 		System.out.println("");
@@ -241,7 +286,7 @@ public class OnlineStore {
 		System.out.println("######################## CLIENTES PREMIUM ###############################");
 		System.out.println("##########################################################################");
 		System.out.println("");
-		for (Cliente cliente : contro.mostrarClientesPremium()) {
+		for (Cliente cliente : contro.mostrarClientesXtipo("Cliente Premium")) {
 			System.out.println(cliente.getNombre() + "\n");
 		}
 		System.out.println("");
@@ -259,48 +304,74 @@ public class OnlineStore {
 
 		String numeroClientes = "0";
 		String numeroArticulos = "0";
-		String cli = "";
+		String nif = "";
 		String art = "";
-		System.out.println("Numero de pedido: ");
-		int numeroPedido = Integer.parseInt(teclado.nextLine());
-		if (contro.existePedido(numeroPedido)) {
+		
+		String numeroPedido;
+		do {
+			System.out.println("Numero de pedido: ");
+			numeroPedido = teclado.nextLine();
+		} while (!esInteger(numeroPedido));
+		
+		if (contro.existePedido(Integer.parseInt(numeroPedido))) {
 			System.out.println("Ya existe un pedido con ese codigo");
 			addPedido();
 		} else {
 			System.out.println("Unidades: ");
-			int unidadesPedido = Integer.parseInt(teclado.nextLine());
+			  int unidadesPedido ;
+
+		        boolean unid = true;
+
+		        do{
+		             unidadesPedido = Integer.parseInt(teclado.nextLine());
+		            try{
+
+		                if (unidadesPedido <= 0 || unidadesPedido > 10){
+		                    throw new Exceptions("El numero de unidades debe ser superior a 0 e inferior a 10. Vuelve a introducirlo:");
+
+		                } else {
+		                    System.out.println("El numero de unidades ha sido aceptado");
+		                    unid = false;}
+
+		            } catch (Exceptions e) {
+		                System.out.println(e.getMessage());
+		            }
+
+		        } while(unid);
 
 			System.out.println("Escoge el cliente del pedido.");
 			System.out.println("");
 			// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 			// listarlos
-			for (int i = 0; i < contro.datos.getClientes().getDato().size(); i++) {
-				System.out.println(i + 1 + ". " + contro.datos.getClientes().getDato().get(i).getNombre() + "\n");
+			List <Cliente> clientes = contro.mostrarClientesTodos();
+			for (int i = 0; i < clientes.size(); i++) {
+				System.out.println(i + 1 + ". " + clientes.get(i).getNombre() + "\n");
 				numeroClientes += String.valueOf(i + 1) + ",";
 			}
 
 			System.out.println("");
 			do {
-				System.out.println("Elige una opci髇 (" + numeroClientes.substring(1) + "): ");
-				cli = teclado.nextLine();
-			} while (!numeroClientes.contains(cli));
+				System.out.println("Elige una opci贸n (" + numeroClientes.substring(1) + "): ");
+				nif = teclado.nextLine();
+			} while (!numeroClientes.contains(nif));
 
 			System.out.println("Escoge el articulo del pedido.");
 			System.out.println("");
 			// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 			// listarlos
-			for (int i = 0; i < contro.datos.getArticulos().getDato().size(); i++) {
-				System.out.println(i + 1 + ". " + contro.datos.getArticulos().getDato().get(i).getDescripcion() + "\n");
+			List <Articulo> articulos = contro.mostrarArticulos();
+			for (int i = 0; i < articulos.size(); i++) {
+				System.out.println(i + 1 + ". " + articulos.get(i) + "\n");
 				numeroArticulos += String.valueOf(i + 1) + ",";
 			}
 
 			System.out.println("");
 			do {
-				System.out.println("Elige una opci髇 (" + numeroArticulos.substring(1) + "): ");
+				System.out.println("Elige una opci贸n (" + numeroArticulos.substring(1) + "): ");
 				art = teclado.nextLine();
-			} while (!numeroArticulos.contains(cli));
+			} while (!numeroArticulos.contains(nif));
 
-			System.out.println(contro.addPedido(numeroPedido, unidadesPedido, LocalDateTime.now(), cli, art));
+			System.out.println(contro.addPedido(Integer.parseInt(numeroPedido), unidadesPedido, LocalDateTime.now(), nif, art));
 			System.out.println("");
 			pausar();
 		}
@@ -311,9 +382,13 @@ public class OnlineStore {
 	 */
 	void eliminarPedido() {
 		// Enviaremos al controlador el pedido que queremos eliminar
-		System.out.println("Pon el numero de pedido que quieres eliminar: ");
-		int numeroPedido = Integer.parseInt(teclado.nextLine());
-		System.out.println(contro.eliminarPedido(numeroPedido));
+		String numeroPedido;
+		do {
+			System.out.println("Numero de pedido: ");
+			numeroPedido = teclado.nextLine();
+		} while (!esInteger(numeroPedido));
+		
+		System.out.println(contro.eliminarPedido(Integer.parseInt(numeroPedido)));
 		System.out.println("");
 		pausar();
 	}
@@ -332,8 +407,9 @@ public class OnlineStore {
 
 		// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 		// listarlos
-		for (int i = 0; i < contro.datos.getClientes().getDato().size(); i++) {
-			System.out.println(i + 1 + ". " + contro.datos.getClientes().getDato().get(i).getNombre() + "\n");
+		List <Cliente> clientes = contro.mostrarClientesTodos();
+		for (int i = 0; i < clientes.size(); i++) {
+			System.out.println(i + 1 + ". " + clientes.get(i) + "\n");
 			numeroClientes += String.valueOf(i + 1) + ",";
 		}
 		System.out.println("");
@@ -374,8 +450,9 @@ public class OnlineStore {
 
 		// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 		// listarlos
-		for (int i = 0; i < contro.datos.getClientes().getDato().size(); i++) {
-			System.out.println(i + 1 + ". " + contro.datos.getClientes().getDato().get(i).getNombre() + "\n");
+		List <Cliente> clientes = contro.mostrarClientesTodos();
+		for (int i = 0; i < clientes.size(); i++) {
+			System.out.println(i + 1 + ". " + clientes.get(i) + "\n");
 			numeroClientes += String.valueOf(i + 1) + ",";
 		}
 		System.out.println("");
@@ -426,6 +503,9 @@ public class OnlineStore {
 	 */
 	boolean esFloat(String numero) {
 		try {
+			if (numero.contains(",")) {
+				numero = numero.replace(",", ".");
+			}
 			Float.parseFloat(numero);
 			return true;
 		} catch (NumberFormatException err) {
@@ -440,7 +520,7 @@ public class OnlineStore {
 	 */
 	void cargarDatos() {
 
-		LocalDateTime fechaActual = LocalDateTime.now();
+		/*LocalDateTime fechaActual = LocalDateTime.now();
 		// Creamos dos tipos de cliente y lo agregamos a la lista generica de clientes
 		Cliente clienteEstandar = new ClienteEstandar("Israel", "Calle calle", "1234567", "elmio@email.com");
 		contro.datos.getClientes().addDato(clienteEstandar);
@@ -465,6 +545,6 @@ public class OnlineStore {
 
 		contro.datos.getPedidos().addDato(pedido1);
 		contro.datos.getPedidos().addDato(pedido2);
-		contro.datos.getPedidos().addDato(pedido3);
+		contro.datos.getPedidos().addDato(pedido3);*/
 	}
 }

@@ -1,9 +1,9 @@
 package tkim.modelo;
 
 public abstract class Cliente {
+	private String nif;
 	private String nombre;
 	private String domicilio;
-	private String nif;
 	private String email;
 	
 	public abstract String tipoCliente();
@@ -11,16 +11,16 @@ public abstract class Cliente {
 	public abstract float descuentoEnv();
 
 	/**
+	 * @param nif
 	 * @param nombre
 	 * @param domicilio
-	 * @param nif
 	 * @param email
 	 */
-	public Cliente(String nombre, String domicilio, String nif, String email) {
+	public Cliente(String nif, String nombre, String domicilio, String email) {
 		super();
+		this.nif = nif;
 		this.nombre = nombre;
 		this.domicilio = domicilio;
-		this.nif = nif;
 		this.email = email;
 	}
 	/**
@@ -29,6 +29,7 @@ public abstract class Cliente {
 	public String getNombre() {
 		return nombre;
 	}
+	
 	/**
 	 * @param nombre the nombre to set
 	 */
@@ -73,8 +74,8 @@ public abstract class Cliente {
 	}
 	@Override
 	public String toString() {
-		return "Cliente [nombre=" + nombre + ", domicilio=" + domicilio + ", nif=" + nif + ", email=" + email
-				+ ", tipoCliente()=" + tipoCliente() + ", calcAnual()=" + calcAnual() + ", descuentoEnv()="
-				+ descuentoEnv() + "]";
+		return "Cliente [nif=" + nif + ", nombre=" + nombre + ", domicilio=" + domicilio + ", email=" + email + "]";
 	}
+	
+	
 }
