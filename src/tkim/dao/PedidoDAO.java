@@ -136,67 +136,81 @@ public class PedidoDAO implements IPedidoDAO{
 	}
 	
 	public String eliminarPedido(int numPedido) {
-		registerDriver();
-		Connection con = null;
-		Boolean existePedido = false;
-		ResultSet resultado = null;
-		String borrado = "El pedido no se ha podido borrar";
-		
-		try {
-			con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
-			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelectpedido());
-			ps.setInt(1, numPedido);
-			resultado = ps.executeQuery();
-			if (resultado.next()) {
-				  if (resultado.getObject("tiempo_preparacion") != null && !resultado.wasNull()) {
-				    borrado = "El pedido introducido no existe";
-				    String tpeparacion = resultado.getString("tiempo_preparacion"); 
-				    String fecha_hora = resultado.getString("fecha_hora_pedido");	// se ha pasado a String
-					
-					DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-					LocalDateTime dateTime = LocalDateTime.parse(fecha_hora, formatter);
-					System.out.println(dateTime);
-					
-					/*
-					 * Duration duration = Duration.between(fecha_hora, LocalDateTime.now()); long
-					 * diff = Math.abs(duration.toMinutes()); boolean enviado_pendiente =
-					 * tpeparacion > diff;
-					 * 
-					 * if (enviado_pendiente) { PreparedStatement statment =
-					 * con.prepareStatement(QuerysEstaticas.getDeletepedido()); statment.setInt(1,
-					 * numPedido);
-					 * 
-					 * borrado = "El pedido ha sido eliminado"; System.out.println(""); }
-					 */
-				
-				  }
-				  
-				} 
-			
+        registerDriver();
+        Connection con = null;
+        Boolean existePedido = false;
+        ResultSet resultado = null;
+        String borrado = "El pedido no se ha podido borrar";
+        
+        try {
+            con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
+            PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelectpedido());
+            ps.setInt(1, numPedido);
+            resultado = ps.executeQuery();
+            if (resultado.next()) {
+                  if (resultado.getObject("tiempo_preparacion") != null && !resultado.wasNull()) {
+                    
+                    int tpeparacion = resultado.getInt("tiempo_preparacion");
+                    //String fecha_hora = resultado.getString("fecha_hora_pedido");    // se ha pasado a String
+                    Timestamp fecha_hora =  (Timestamp) resultado.getObject("fecha_hora_pedido");
+                    LocalDateTime localDateTime = fecha_hora.toLocalDateTime().minusHours(1);
+                  
+                    //DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                    //LocalDateTime dateTime = LocalDateTime.parse(fecha_hora, formatter);
+                    System.out.println(localDateTime);
+                    System.out.println(LocalDateTime.now());
+                    
+                    
+                      Duration duration = Duration.between(localDateTime, LocalDateTime.now());
+                      long diff = Math.abs(duration.toMinutes());
+                      System.out.println("la diferencia en min:" + diff);
+                      boolean enviado_pendiente = tpeparacion > diff;
+                      
+                      if (enviado_pendiente) {
+                          PreparedStatement statment = con.prepareStatement(QuerysEstaticas.getDeletepedido());
+                          statment.setInt(1,numPedido);
+                          statment.execute();
+                      
+                          borrado = "El pedido ha sido eliminado";
+                          System.out.println("");
+                      }
+                     
+                
+                      }
+                  
+                  
+            } else {
+                borrado = "El pedido introducido no existe";
+              }
+            
+                  
+            
 
-			return borrado;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return borrado;
-		}finally {
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			if (resultado != null) {
-				try {
-					resultado.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		
-	}
+
+
+           return borrado;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return borrado;
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            
+            if (resultado != null) {
+                try {
+                    resultado.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+    }
 }

@@ -15,9 +15,9 @@ public class Controlador {
 	LanzarClienteDAO lcd = new LanzarClienteDAO();
 	LanzarArticuloDAO lad = new LanzarArticuloDAO();
 	
-	public String addCliente(String nombre, String domi, String nif, String mail, String tipoCliente) {
+	public String addCliente(String nif, String nombre, String domi, String mail, String tipoCliente) {
 		try {
-			return lcd.anadirClientes(nombre,domi,nif, mail, tipoCliente);
+			return lcd.anadirClientes(nif, nombre, domi, mail, tipoCliente);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -54,8 +54,12 @@ public class Controlador {
 		return lad.mostrarArticulos();
 	}
 	
-	public List<Cliente> mostrarClientes(){
-		return lcd.mostrarClientesDAO();	
+	public List<Cliente> mostrarClientesTodos(){
+		return lcd.mostrarClientesTodos();	
+	}
+	
+	public List<Cliente> mostrarClientesXtipo(String tipoCliente){
+		return lcd.mostrarClientesXtipo(tipoCliente);	
 	}
 	
 	public Boolean existeArticulo(String codigo) {

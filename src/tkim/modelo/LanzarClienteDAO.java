@@ -7,19 +7,19 @@ import tkim.dao.IClientesDAO;
 
 public class LanzarClienteDAO {
 
-	public String anadirClientes(String nombre, String domi, String nif, String mail,String tipoCliente) {
+	public String anadirClientes(String nif, String nombre, String domi, String mail,String tipoCliente) {
 		
 		try {
 			
 			switch (tipoCliente) {
 			
 			case "1":
-				Cliente cliEst = new ClienteEstandar (nombre, domi, nif, mail);
+				Cliente cliEst = new ClienteEstandar (nif, nombre, domi, mail);
 				IClientesDAO daoE = (IClientesDAO)FactoryDAOs.getDAO("Cliente");
 				return daoE.anadirClientesDAO(cliEst);
 				
 			case "2":
-				Cliente cliPrem = new ClientePremium (nombre, domi, nif, mail);
+				Cliente cliPrem = new ClientePremium (nif, nombre, domi, mail);
 				IClientesDAO daoP = (IClientesDAO)FactoryDAOs.getDAO("Cliente");
 				return daoP.anadirClientesDAO(cliPrem);
 			}
@@ -39,9 +39,14 @@ public class LanzarClienteDAO {
 	}
 
 
-	public List<Cliente> mostrarClientesDAO() {
+	public List<Cliente> mostrarClientesXtipo(String tipoCliente) {
 		IClientesDAO dao = (IClientesDAO) FactoryDAOs.getDAO("Cliente");
-		return dao.mostrarClientesDAO();
+		return dao.mostrarClientesXtipo(tipoCliente);
+	}
+	
+	public List<Cliente> mostrarClientesTodos(){
+		IClientesDAO dao = (IClientesDAO) FactoryDAOs.getDAO("Cliente");
+		return dao.mostrarClientesTodos();
 	}
 
 	public Cliente buscarCliente(String codigo_cliente) {

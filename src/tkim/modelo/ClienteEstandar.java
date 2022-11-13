@@ -2,8 +2,8 @@ package tkim.modelo;
 
 public class ClienteEstandar extends Cliente{
 	
-	public ClienteEstandar(String nombre, String domicilio, String nif, String email) {
-		super(nombre, domicilio, nif, email);	
+	public ClienteEstandar(String nif, String nombre, String domicilio, String email) {
+		super(nif, nombre, domicilio, email);
 	}
 
 	@Override

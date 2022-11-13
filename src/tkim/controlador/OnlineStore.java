@@ -231,7 +231,7 @@ public class OnlineStore {
 			// Aqui enviaremos el nif, nombre, domicilio, email y tipo de cliente al
 			// controlador
 
-			System.out.println(contro.addCliente(nombre, domicilio, nif, email, tipoCliente));
+			System.out.println(contro.addCliente(nif, nombre, domicilio, email, tipoCliente));
 			System.out.println("");
 			pausar();
 		}
@@ -248,7 +248,7 @@ public class OnlineStore {
 		System.out.println("############################# CLIENTES ###################################");
 		System.out.println("##########################################################################");
 		System.out.println("");
-		for (Cliente cliente : contro.mostrarClientes()) {
+		for (Cliente cliente : contro.mostrarClientesTodos()) {
 			System.out.println(cliente + "\n");
 		}
 		System.out.println("");
@@ -267,7 +267,7 @@ public class OnlineStore {
 		System.out.println("######################## CLIENTES ESTANDAR ###############################");
 		System.out.println("##########################################################################");
 		System.out.println("");
-		for (Cliente cliente : contro.mostrarClientes()) {
+		for (Cliente cliente : contro.mostrarClientesXtipo("Cliente Estandar")) {
 			System.out.println(cliente.getNombre() + "\n");
 		}
 		System.out.println("");
@@ -286,7 +286,7 @@ public class OnlineStore {
 		System.out.println("######################## CLIENTES PREMIUM ###############################");
 		System.out.println("##########################################################################");
 		System.out.println("");
-		for (Cliente cliente : contro.mostrarClientes()) {
+		for (Cliente cliente : contro.mostrarClientesXtipo("Cliente Premium")) {
 			System.out.println(cliente.getNombre() + "\n");
 		}
 		System.out.println("");
@@ -343,7 +343,7 @@ public class OnlineStore {
 			System.out.println("");
 			// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 			// listarlos
-			List <Cliente> clientes = contro.mostrarClientes();
+			List <Cliente> clientes = contro.mostrarClientesTodos();
 			for (int i = 0; i < clientes.size(); i++) {
 				System.out.println(i + 1 + ". " + clientes.get(i).getNombre() + "\n");
 				numeroClientes += String.valueOf(i + 1) + ",";
@@ -407,7 +407,7 @@ public class OnlineStore {
 
 		// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 		// listarlos
-		List <Cliente> clientes = contro.mostrarClientes();
+		List <Cliente> clientes = contro.mostrarClientesTodos();
 		for (int i = 0; i < clientes.size(); i++) {
 			System.out.println(i + 1 + ". " + clientes.get(i) + "\n");
 			numeroClientes += String.valueOf(i + 1) + ",";
@@ -450,7 +450,7 @@ public class OnlineStore {
 
 		// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 		// listarlos
-		List <Cliente> clientes = contro.mostrarClientes();
+		List <Cliente> clientes = contro.mostrarClientesTodos();
 		for (int i = 0; i < clientes.size(); i++) {
 			System.out.println(i + 1 + ". " + clientes.get(i) + "\n");
 			numeroClientes += String.valueOf(i + 1) + ",";

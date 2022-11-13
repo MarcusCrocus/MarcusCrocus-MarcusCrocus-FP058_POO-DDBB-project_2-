@@ -3,6 +3,7 @@ package tkim.dao;
 import tkim.clasesEstaticas.QuerysEstaticas;
 import tkim.modelo.Cliente;
 import tkim.modelo.ClienteEstandar;
+import tkim.modelo.ClientePremium;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -84,7 +85,7 @@ public class ClienteDAO implements IClientesDAO {
 			ps.setString(1, nif); //si existe en queries el parametro 1
 			result = ps.executeQuery();
 				if (result.next()) {
-					if (result.getObject(nif) !=null && !result.wasNull()) {
+					if (result.getObject("nif") !=null && !result.wasNull()) {
 						existeCliente = true;
 					}
 				}
@@ -117,7 +118,7 @@ public class ClienteDAO implements IClientesDAO {
 	}
 
 	@Override
-	public List<Cliente> mostrarClientesDAO() {
+	public List<Cliente> mostrarClientesXtipo(String tipoCliente) {
 		registerDriver();
 		Connection con = null;
 		ResultSet rs = null;
@@ -126,6 +127,7 @@ public class ClienteDAO implements IClientesDAO {
 		try {
 			con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
 			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelecttipocliente());
+			ps.setString(1, tipoCliente);
 			rs = ps.executeQuery();
 			clientes = new ArrayList<Cliente>();
 			
@@ -166,6 +168,56 @@ public class ClienteDAO implements IClientesDAO {
 	public Cliente buscarCliente(String codigo_cliente) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Cliente> mostrarClientesTodos() {
+		registerDriver();
+		Connection con = null;
+		ResultSet rs = null;
+		List <Cliente> clientes = null;
+		
+		try {
+			con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
+			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelectclientestodos());
+			rs = ps.executeQuery();
+			Cliente cli = null;
+			clientes = new ArrayList<Cliente>();
+			
+				while (rs.next()) {
+					String nif = rs.getString(1);
+					String nombre = rs.getString(2);
+					String domi = rs.getString(3);
+					String email = rs.getString(4);
+					String tipo_cli = rs.getString(5);
+					Float cuotaAnual = rs.getFloat(6);
+					Float descuento_env = rs.getFloat(7);
+					String tc = tipo_cli.replace(" ","");
+					if (tc.equals("ClientePremium")) {
+						cli = new ClientePremium(nif, nombre, domi, email);
+					} else {
+						cli = new ClienteEstandar(nif, nombre, domi, email);
+					}
+					
+					clientes.add(cli);
+				}
+				return clientes;
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return clientes;
+			
+		}finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 

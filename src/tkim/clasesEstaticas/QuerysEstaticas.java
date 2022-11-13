@@ -13,10 +13,10 @@ public class QuerysEstaticas {
     		"SELECT * FROM ARTICULOS ORDER BY CODIGO_ARTICULO ASC";
     static final String SELECEXISTE = 
     		"SELECT codigo_articulo FROM ARTICULOS WHERE CODIGO_ARTICULO = ? ORDER BY CODIGO_ARTICULO ASC";
+    static final String SELECTCLIENTESTODOS = 
+    		"SELECT * FROM CLIENTES";
     static final String SELECPEDIDOSPENDIENTES = 
-    		"SELECT codigo_articulo FROM ARTICULOS WHERE CODIGO_ARTICULO = ? ORDER BY CODIGO_ARTICULO ASC";
-    
-    
+    		"SELECT * FROM ARTICULOS WHERE CODIGO_ARTICULO = ? ORDER BY CODIGO_ARTICULO ASC";
     static final String INSERTCLIENTE = 
     		"INSERT INTO poo_uoc.CLIENTES (nif, nombre, domicilio, email, tipo_cliente, cuota_anual, descuento_envio)" 
     + "value (?,?, ?, ?, ?, ?, ?)";
@@ -25,7 +25,7 @@ public class QuerysEstaticas {
     		"SELECT nif FROM poo_uoc.CLIENTES WHERE NIF = ?";
     
     static final String SELECTTIPOCLIENTE = 
-    		"SELECT tipo_cliente FROM poo_uoc.CLIENTES WHERE tipo_cliente = ?";
+    		"SELECT * FROM poo_uoc.CLIENTES WHERE tipo_cliente = ?";
     static final String DELETEPEDIDO = 
     		"DELETE FROM poo_uoc.PEDIDOS WHERE numero_pedido = ?";
     static final String SELECTPEDIDO =  //    pedidoExiste
@@ -35,7 +35,8 @@ public class QuerysEstaticas {
     static final String INSERTPEDIDO = 	// addPedido
     		"INSERT INTO poo_uoc.PEDIDOS (numero_pedido, unidades_pedido, fecha_hora_pedido, total_pedido, cliente_fk, articulo_fk)"
     		+ "values (?, ?, ?, ?, ?, ?)";
-	public static String getJdbcDriver() {
+
+    public static String getJdbcDriver() {
 		return JDBC_DRIVER;
 	}
 	public static String getDbUser() {
@@ -55,6 +56,9 @@ public class QuerysEstaticas {
 	}
 	public static String getSelecexiste() {
 		return SELECEXISTE;
+	}
+	public static String getSelectclientestodos() {
+		return SELECTCLIENTESTODOS;
 	}
 	public static String getSelecpedidospendientes() {
 		return SELECPEDIDOSPENDIENTES;
