@@ -165,9 +165,16 @@ public class ClienteDAO implements IClientesDAO {
 	}
 
 	@Override
-	public Cliente buscarCliente(String codigo_cliente) {
-		// TODO Auto-generated method stub
-		return null;
+	public Cliente buscarCliente(String nif) {
+		//buscas cliente en BBDD por nif
+		//del resulset miras que tipo de cliente es y haces el if/else
+		String tc = tipo_cli.replace(" ","");
+		if tipocliente estandar
+		Cliente cliente = new ClienteEstandar(nif, nombre, domicilio, email);
+		else
+		Cliente cliente = new ClientePremium(nif, nombre, domicilio, email);
+		//miras que tipo de cliente es y haces un if para meterlo como estandar o como premium
+		return cliente;
 	}
 
 	@Override

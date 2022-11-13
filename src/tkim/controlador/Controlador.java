@@ -24,9 +24,9 @@ public class Controlador {
 		}	
 	}
 	
-	public String addPedido(int numeroPedido, int unidadesPedido, LocalDateTime fechaHoraPedido, String codigo_cliente, String codigo_articulo) {
+	public String addPedido(int numeroPedido, int unidadesPedido, LocalDateTime fechaHoraPedido, String nif, String codigo_articulo) {
 		try {
-			Cliente c = lcd.buscarCliente(codigo_cliente);
+			Cliente c = lcd.buscarCliente(nif);
 			Articulo a = lad.buscarArticulo(codigo_articulo);
 			return lpd.addPedido(numeroPedido, unidadesPedido, fechaHoraPedido, c, a);
 		} catch (Exception e) {

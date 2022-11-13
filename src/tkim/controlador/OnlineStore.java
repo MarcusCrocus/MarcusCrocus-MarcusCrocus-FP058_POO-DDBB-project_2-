@@ -304,7 +304,7 @@ public class OnlineStore {
 
 		String numeroClientes = "0";
 		String numeroArticulos = "0";
-		String cli = "";
+		String nif = "";
 		String art = "";
 		
 		String numeroPedido;
@@ -352,8 +352,8 @@ public class OnlineStore {
 			System.out.println("");
 			do {
 				System.out.println("Elige una opción (" + numeroClientes.substring(1) + "): ");
-				cli = teclado.nextLine();
-			} while (!numeroClientes.contains(cli));
+				nif = teclado.nextLine();
+			} while (!numeroClientes.contains(nif));
 
 			System.out.println("Escoge el articulo del pedido.");
 			System.out.println("");
@@ -369,9 +369,9 @@ public class OnlineStore {
 			do {
 				System.out.println("Elige una opción (" + numeroArticulos.substring(1) + "): ");
 				art = teclado.nextLine();
-			} while (!numeroArticulos.contains(cli));
+			} while (!numeroArticulos.contains(nif));
 
-			System.out.println(contro.addPedido(Integer.parseInt(numeroPedido), unidadesPedido, LocalDateTime.now(), cli, art));
+			System.out.println(contro.addPedido(Integer.parseInt(numeroPedido), unidadesPedido, LocalDateTime.now(), nif, art));
 			System.out.println("");
 			pausar();
 		}
