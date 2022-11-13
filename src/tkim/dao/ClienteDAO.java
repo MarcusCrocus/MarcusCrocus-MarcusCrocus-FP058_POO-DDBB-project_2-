@@ -162,6 +162,12 @@ public class ClienteDAO implements IClientesDAO {
 		
 	}
 
+	@Override
+	public Cliente buscarCliente(String codigo_cliente) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 

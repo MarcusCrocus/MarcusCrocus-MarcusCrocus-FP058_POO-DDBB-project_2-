@@ -9,4 +9,5 @@ public interface IArticuloDAO {
 	public String addArticulos(Articulo articulo);
 	public List<Articulo> mostrarArticulos();
 	public Boolean existeArticulo(String codigo);
+	public Articulo buscarArticulo(String codigo_articulo);
 }

@@ -140,4 +140,11 @@ public class ArticuloDAO implements IArticuloDAO {
 			}
 		}
 	}
+
+
+	@Override
+	public Articulo buscarArticulo(String codigo_articulo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

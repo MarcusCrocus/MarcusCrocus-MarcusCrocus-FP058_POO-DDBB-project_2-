@@ -248,7 +248,7 @@ public class OnlineStore {
 		System.out.println("############################# CLIENTES ###################################");
 		System.out.println("##########################################################################");
 		System.out.println("");
-		for (Cliente cliente : contro.datos.getClientes().getDato()) {
+		for (Cliente cliente : contro.mostrarClientes()) {
 			System.out.println(cliente + "\n");
 		}
 		System.out.println("");
@@ -343,8 +343,9 @@ public class OnlineStore {
 			System.out.println("");
 			// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 			// listarlos
-			for (int i = 0; i < contro.datos.getClientes().getDato().size(); i++) {
-				System.out.println(i + 1 + ". " + contro.datos.getClientes().getDato().get(i).getNombre() + "\n");
+			List <Cliente> clientes = contro.mostrarClientes();
+			for (int i = 0; i < clientes.size(); i++) {
+				System.out.println(i + 1 + ". " + clientes.get(i).getNombre() + "\n");
 				numeroClientes += String.valueOf(i + 1) + ",";
 			}
 
@@ -358,8 +359,9 @@ public class OnlineStore {
 			System.out.println("");
 			// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 			// listarlos
-			for (int i = 0; i < contro.datos.getArticulos().getDato().size(); i++) {
-				System.out.println(i + 1 + ". " + contro.datos.getArticulos().getDato().get(i).getDescripcion() + "\n");
+			List <Articulo> articulos = contro.mostrarArticulos();
+			for (int i = 0; i < articulos.size(); i++) {
+				System.out.println(i + 1 + ". " + articulos.get(i) + "\n");
 				numeroArticulos += String.valueOf(i + 1) + ",";
 			}
 
@@ -405,8 +407,9 @@ public class OnlineStore {
 
 		// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 		// listarlos
-		for (int i = 0; i < contro.datos.getClientes().getDato().size(); i++) {
-			System.out.println(i + 1 + ". " + contro.datos.getClientes().getDato().get(i).getNombre() + "\n");
+		List <Cliente> clientes = contro.mostrarClientes();
+		for (int i = 0; i < clientes.size(); i++) {
+			System.out.println(i + 1 + ". " + clientes.get(i) + "\n");
 			numeroClientes += String.valueOf(i + 1) + ",";
 		}
 		System.out.println("");
@@ -447,8 +450,9 @@ public class OnlineStore {
 
 		// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 		// listarlos
-		for (int i = 0; i < contro.datos.getClientes().getDato().size(); i++) {
-			System.out.println(i + 1 + ". " + contro.datos.getClientes().getDato().get(i).getNombre() + "\n");
+		List <Cliente> clientes = contro.mostrarClientes();
+		for (int i = 0; i < clientes.size(); i++) {
+			System.out.println(i + 1 + ". " + clientes.get(i) + "\n");
 			numeroClientes += String.valueOf(i + 1) + ",";
 		}
 		System.out.println("");
@@ -516,7 +520,7 @@ public class OnlineStore {
 	 */
 	void cargarDatos() {
 
-		LocalDateTime fechaActual = LocalDateTime.now();
+		/*LocalDateTime fechaActual = LocalDateTime.now();
 		// Creamos dos tipos de cliente y lo agregamos a la lista generica de clientes
 		Cliente clienteEstandar = new ClienteEstandar("Israel", "Calle calle", "1234567", "elmio@email.com");
 		contro.datos.getClientes().addDato(clienteEstandar);
@@ -541,6 +545,6 @@ public class OnlineStore {
 
 		contro.datos.getPedidos().addDato(pedido1);
 		contro.datos.getPedidos().addDato(pedido2);
-		contro.datos.getPedidos().addDato(pedido3);
+		contro.datos.getPedidos().addDato(pedido3);*/
 	}
 }

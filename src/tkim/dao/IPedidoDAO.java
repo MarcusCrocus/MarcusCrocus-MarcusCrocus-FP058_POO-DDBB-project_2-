@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 
 import tkim.modelo.Articulo;
 import tkim.modelo.Cliente;
-import tkim.modelo.Listas;
-import tkim.modelo.Pedido;
 
 public interface IPedidoDAO {
 	

@@ -7,7 +7,7 @@ import tkim.dao.IClientesDAO;
 
 public class LanzarClienteDAO {
 
-	public String anadirClientesDAO(String nombre, String domi, String nif, String mail,String tipoCliente) {
+	public String anadirClientes(String nombre, String domi, String nif, String mail,String tipoCliente) {
 		
 		try {
 			
@@ -44,7 +44,10 @@ public class LanzarClienteDAO {
 		return dao.mostrarClientesDAO();
 	}
 
-
+	public Cliente buscarCliente(String codigo_cliente) {
+		IClientesDAO dao = (IClientesDAO) FactoryDAOs.getDAO("Cliente");
+		return dao.buscarCliente(codigo_cliente);
+	}
 
 
 

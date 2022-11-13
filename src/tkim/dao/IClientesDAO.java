@@ -9,4 +9,5 @@ public interface IClientesDAO {
 	public String anadirClientesDAO(Cliente cli);
 	public Boolean existeClienteDAO(String codigo);
 	public List<Cliente> mostrarClientesDAO();
+	public Cliente buscarCliente(String codigo_cliente);
 }
