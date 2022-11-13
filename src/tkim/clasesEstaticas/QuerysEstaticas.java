@@ -26,76 +26,58 @@ public class QuerysEstaticas {
     
     static final String SELECTTIPOCLIENTE = 
     		"SELECT tipo_cliente FROM poo_uoc.CLIENTES WHERE tipo_cliente = ?";
-    
-
+    static final String DELETEPEDIDO = 
+    		"DELETE FROM poo_uoc.PEDIDOS WHERE numero_pedido = ?";
+    static final String SELECTPEDIDO =  //    pedidoExiste
+    		"select tiempo_preparacion, fecha_hora_pedido  from poo_uoc.pedidos inner join poo_uoc.articulos on articulo_fk = codigo_articulo where numero_pedido = ?";
+    static final String SELECPEXISTE =  //    pedidoExiste
+    		"SELECT numero_pedido FROM PEDIDOS WHERE NUMERO_PEDIDO = ? ORDER BY NUMERO_PEDIDO ASC";
+    static final String INSERTPEDIDO = 	// addPedido
+    		"INSERT INTO poo_uoc.PEDIDOS (numero_pedido, unidades_pedido, fecha_hora_pedido, total_pedido, cliente_fk, articulo_fk)"
+    		+ "values (?, ?, ?, ?, ?, ?)";
 	public static String getJdbcDriver() {
 		return JDBC_DRIVER;
 	}
-
 	public static String getDbUser() {
 		return DB_USER;
 	}
-
 	public static String getDbPass() {
 		return DB_PASS;
 	}
-
 	public static String getDbUrl() {
 		return DB_URL;
 	}
-
 	public static String getInsert() {
 		return INSERT;
 	}
-
 	public static String getSelectall() {
 		return SELECTALL;
 	}
-
 	public static String getSelecexiste() {
 		return SELECEXISTE;
 	}
-
 	public static String getSelecpedidospendientes() {
 		return SELECPEDIDOSPENDIENTES;
 	}
-
 	public static String getInsertcliente() {
 		return INSERTCLIENTE;
 	}
-
 	public static String getSelectexistecliente() {
 		return SELECTEXISTECLIENTE;
 	}
-
 	public static String getSelecttipocliente() {
 		return SELECTTIPOCLIENTE;
 	}
-
-	
-    
-    
-//	public static String getJdbcDriver() {
-//		return JDBC_DRIVER;
-//	}
-//	public static String getDbUser() {
-//		return DB_USER;
-//	}
-//	public static String getDbPass() {
-//		return DB_PASS;
-//	}
-//	public static String getDbUrl() {
-//		return DB_URL;
-//	}
-//	public static String getInsert() {
-//		return INSERT;
-//	}
-//	public static String getSelectall() {
-//		return SELECTALL;
-//	}
-//	public static String getSelecexiste() {
-//		return SELECEXISTE;
-//	}
-    
-    
+	public static String getDeletepedido() {
+		return DELETEPEDIDO;
+	}
+	public static String getSelectpedido() {
+		return SELECTPEDIDO;
+	}
+	public static String getSelecpexiste() {
+		return SELECPEXISTE;
+	}
+	public static String getInsertpedido() {
+		return INSERTPEDIDO;
+	}
 }
