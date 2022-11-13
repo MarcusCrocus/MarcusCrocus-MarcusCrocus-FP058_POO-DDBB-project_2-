@@ -5,7 +5,7 @@ public class QuerysEstaticas {
 	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 	static final String DB_USER = "usuario_uoc";
     static final String DB_PASS = "4321";
-    static final String DB_URL = "jdbc:mysql://localhost:3308/poo_uoc?user=" + DB_USER + "&password=" + DB_PASS +"&serverTimezone=UTC";
+    static final String DB_URL = "jdbc:mysql://localhost:2211/poo_uoc?user=" + DB_USER + "&password=" + DB_PASS +"&serverTimezone=UTC";
     static final String INSERT = 
     		"INSERT INTO poo_uoc.ARTICULOS (codigo_articulo, descripcion, precio_venta, gastos_envio, tiempo_preparacion) "
     		+ "values (?, ?, ?, ?, ?)";
