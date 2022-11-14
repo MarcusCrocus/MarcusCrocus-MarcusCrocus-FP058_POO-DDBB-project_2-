@@ -31,10 +31,10 @@ public class Controlador {
 			return lpd.addPedido(numeroPedido, unidadesPedido, fechaHoraPedido, c, a);
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+			return e.toString();
 		}
 		
-		return "hola";
+		
 		
 	}
 	

@@ -302,8 +302,8 @@ public class OnlineStore {
 	 */
 	void addPedido() {
 
-		String numeroClientes = "0";
-		String numeroArticulos = "0";
+		String nifClientes = "";
+		String codigoArticulos = "";
 		String nif = "";
 		String art = "";
 		
@@ -344,32 +344,40 @@ public class OnlineStore {
 			// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 			// listarlos
 			List <Cliente> clientes = contro.mostrarClientesTodos();
-			for (int i = 0; i < clientes.size(); i++) {
-				System.out.println(i + 1 + ". " + clientes.get(i).getNombre() + "\n");
-				numeroClientes += String.valueOf(i + 1) + ",";
+			for (Cliente cliente : clientes) {
+				System.out.println("nif: "+cliente.getNif()+" nombre: "+cliente.getNombre()+" mail: "+cliente.getEmail());
+				nifClientes += cliente.getNif() + ",";
 			}
+			/*for (int i = 0; i < clientes.size(); i++) {
+				System.out.println(i + 1 + ". " + clientes.get(i).getNombre() + "\n");
+				nifClientes += String.valueOf(i + 1) + ",";
+			}*/
 
 			System.out.println("");
 			do {
-				System.out.println("Elige una opción (" + numeroClientes.substring(1) + "): ");
+				System.out.println("Elige un nif de cliente (" + nifClientes + "): ");
 				nif = teclado.nextLine();
-			} while (!numeroClientes.contains(nif));
+			} while (!nifClientes.contains(nif+","));
 
 			System.out.println("Escoge el articulo del pedido.");
 			System.out.println("");
-			// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
+			// Aqui llamaremos al controlador para que nos devuelva la lista de articulos y
 			// listarlos
 			List <Articulo> articulos = contro.mostrarArticulos();
-			for (int i = 0; i < articulos.size(); i++) {
-				System.out.println(i + 1 + ". " + articulos.get(i) + "\n");
-				numeroArticulos += String.valueOf(i + 1) + ",";
+			for (Articulo articulo : articulos) {
+				System.out.println("Codigo: "+articulo.getCodigo()+" descripcion: "+articulo.getDescripcion());
+				codigoArticulos += articulo.getCodigo() + ",";
 			}
+			/*for (int i = 0; i < articulos.size(); i++) {
+				System.out.println(i + 1 + ". " + articulos.get(i) + "\n");
+				codigoArticulos += String.valueOf(i + 1) + ",";
+			}*/
 
 			System.out.println("");
 			do {
-				System.out.println("Elige una opción (" + numeroArticulos.substring(1) + "): ");
+				System.out.println("Elige un codigo de articulo (" + codigoArticulos + "): ");
 				art = teclado.nextLine();
-			} while (!numeroArticulos.contains(nif));
+			} while (!codigoArticulos.contains(art+","));
 
 			System.out.println(contro.addPedido(Integer.parseInt(numeroPedido), unidadesPedido, LocalDateTime.now(), nif, art));
 			System.out.println("");
