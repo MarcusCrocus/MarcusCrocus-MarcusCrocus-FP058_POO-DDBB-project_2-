@@ -35,8 +35,10 @@ public class QuerysEstaticas {
     static final String INSERTPEDIDO = 	// addPedido
     		"INSERT INTO poo_uoc.PEDIDOS (numero_pedido, unidades_pedido, fecha_hora_pedido, total_pedido, cliente_fk, articulo_fk)"
     		+ "values (?, ?, ?, ?, ?, ?)";
-
-    public static String getJdbcDriver() {
+    static final String SELECTARTICULO =  //    pedidoExiste
+    		"select * from ARTICULOS WHERE CODIGO_ARTICULO  = ?";
+    
+	public static String getJdbcDriver() {
 		return JDBC_DRIVER;
 	}
 	public static String getDbUser() {
@@ -84,4 +86,9 @@ public class QuerysEstaticas {
 	public static String getInsertpedido() {
 		return INSERTPEDIDO;
 	}
+	public static String getSelectarticulo() {
+		return SELECTARTICULO;
+	}
+    
+    
 }

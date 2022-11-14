@@ -145,7 +145,48 @@ public class ArticuloDAO implements IArticuloDAO {
 
 	@Override
 	public Articulo buscarArticulo(String codigo_articulo) {
-		// TODO Auto-generated method stub
-		return null;
+		registerDriver();
+		Connection con = null;
+		ResultSet rs = null;
+		Articulo articulo = null;
+		
+		try {
+			con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
+			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelectarticulo());
+			ps.setString(1, codigo_articulo);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				String des = rs.getString("descripcion");
+			    float precio_venta = rs.getFloat("precio_venta");
+			    float gastos_envio = rs.getFloat("gastos_envio");
+			    int tiempo_preparacion =rs.getInt("tiempo_preparacion");
+			    articulo = new Articulo(codigo_articulo, des, precio_venta, gastos_envio, tiempo_preparacion);
+			}
+		    
+		    
+			
+			return articulo;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }
