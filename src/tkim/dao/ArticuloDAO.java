@@ -155,7 +155,7 @@ public class ArticuloDAO implements IArticuloDAO {
 			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelectarticulo());
 			ps.setString(1, codigo_articulo);
 			rs = ps.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				String des = rs.getString("descripcion");
 			    float precio_venta = rs.getFloat("precio_venta");
 			    float gastos_envio = rs.getFloat("gastos_envio");
