@@ -22,7 +22,7 @@ public class QuerysEstaticas {
     + "value (?,?, ?, ?, ?, ?, ?)";
     
     static final String SELECTEXISTECLIENTE =
-    		"SELECT nif FROM poo_uoc.CLIENTES WHERE NIF = ?";
+    		"SELECT * FROM poo_uoc.CLIENTES WHERE NIF = ?";
     
     static final String SELECTTIPOCLIENTE = 
     		"SELECT * FROM poo_uoc.CLIENTES WHERE tipo_cliente = ?";
