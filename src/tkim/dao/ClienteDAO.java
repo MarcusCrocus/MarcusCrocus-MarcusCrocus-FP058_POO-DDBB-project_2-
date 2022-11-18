@@ -116,6 +116,45 @@ public class ClienteDAO implements IClientesDAO {
 		}
 		
 	}
+	
+	
+	@Override
+	public Cliente buscarCliente(String nif) {
+
+		registerDriver();
+		Connection con = null;
+		ResultSet result = null;
+		
+		Cliente cli = null;
+		
+		try {
+			con=DriverManager.getConnection(QuerysEstaticas.getDbUrl());
+			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelectexistecliente());
+			
+			ps.setString(1, nif);
+			
+			result = ps.executeQuery();
+
+					while (result.next()) {
+						String nif1 = result.getString(1);
+						String nombre = result.getString(2);
+						String domi = result.getString(3);
+						String email = result.getString(4);
+						String tipo_cli = result.getString(5);
+						Float cuotaAnual = result.getFloat(6);
+						Float descuento_env = result.getFloat(7);
+						
+					cli = new ClienteEstandar(nif1, nombre, domi, email);
+						
+					}
+					return cli;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
 
 	@Override
 	public List<Cliente> mostrarClientesXtipo(String tipoCliente) {
@@ -164,18 +203,7 @@ public class ClienteDAO implements IClientesDAO {
 		
 	}
 
-	@Override
-	public Cliente buscarCliente(String nif) {
-		//buscas cliente en BBDD por nif
-		//del resulset miras que tipo de cliente es y haces el if/else
-		String tc = tipo_cli.replace(" ","");
-		if tipocliente estandar
-		Cliente cliente = new ClienteEstandar(nif, nombre, domicilio, email);
-		else
-		Cliente cliente = new ClientePremium(nif, nombre, domicilio, email);
-		//miras que tipo de cliente es y haces un if para meterlo como estandar o como premium
-		return cliente;
-	}
+
 
 	@Override
 	public List<Cliente> mostrarClientesTodos() {
