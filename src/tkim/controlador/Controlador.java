@@ -46,7 +46,7 @@ public class Controlador {
 			
 		}
 		
-		return "hola";
+		return null;
 		
 	}
 	
@@ -81,16 +81,14 @@ public class Controlador {
 		return lpd.eliminarPedido(codigoPedido);
 	}
 	
-	public List<Pedido> mostrarPedEnviados(int numeroOrdenArray) {
+	public List<Pedido> mostrarPedEnviados(String nif) {
 		//String nif = datos.getClientes().getDato().get(numeroOrdenArray-1).getNif();
-		//return lpd.mostrarPedEnviados(nif);
-		return null;
+		return lpd.mostrarPedidosEnviados(nif);
 	}
 	
-	public List<Pedido> mostrarPedPendientes(int numeroOrdenArray) {
+	public List<Pedido> mostrarPedPendientes(String nif) {
 		//String nif = datos.getClientes().getDato().get(numeroOrdenArray-1).getNif();
-		//return lpd.mostrarPedPendientes(nif);
-		return null;
+		return lpd.mostrarPedidosPendiente(nif);
 	}
 
 	public LanzarPedidoDAO getLpd() {

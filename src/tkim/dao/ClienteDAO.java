@@ -4,7 +4,7 @@ import tkim.clasesEstaticas.QuerysEstaticas;
 import tkim.modelo.Cliente;
 import tkim.modelo.ClienteEstandar;
 import tkim.modelo.ClientePremium;
-
+import tkim.conexionBBDD.ConexionMySQL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,25 +15,18 @@ import java.util.List;
 
 public class ClienteDAO implements IClientesDAO {
 	
-    private void registerDriver() {
-        try {
-            Class.forName(QuerysEstaticas.getJdbcDriver()).newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            System.err.println("ERROR: failed to load HSQLDB JDBC driver.");
-            e.printStackTrace();
-        }
-    }
-
+	ConexionMySQL cMySQL = new ConexionMySQL();
+	Connection con = cMySQL.conectar();
+	
 	@Override
 	public String anadirClientesDAO(Cliente cli) {
 		
-		registerDriver();
 		String message = "El Cliente no se ha podido ser anadido";
-		Connection con = null;
+		
 		
 		try {
 			
-			con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
+			
 			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getInsertcliente());
 			
 			ps.setString(1, cli.getNif());
@@ -74,12 +67,10 @@ public class ClienteDAO implements IClientesDAO {
 	@Override
 	public Boolean existeClienteDAO(String nif) {
 		Boolean existeCliente = false;
-		registerDriver();
-		Connection con = null;
+
 		ResultSet result = null;
 		
 		try {
-			con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
 			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelectexistecliente());
 			
 			ps.setString(1, nif); //si existe en queries el parametro 1
@@ -121,14 +112,11 @@ public class ClienteDAO implements IClientesDAO {
 	@Override
 	public Cliente buscarCliente(String nif) {
 
-		registerDriver();
-		Connection con = null;
 		ResultSet result = null;
 		
 		Cliente cli = null;
 		
 		try {
-			con=DriverManager.getConnection(QuerysEstaticas.getDbUrl());
 			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelectexistecliente());
 			
 			ps.setString(1, nif);
@@ -143,8 +131,13 @@ public class ClienteDAO implements IClientesDAO {
 						String tipo_cli = result.getString(5);
 						Float cuotaAnual = result.getFloat(6);
 						Float descuento_env = result.getFloat(7);
+						String tc = tipo_cli.replace(" ","");	
+						if (tc.equals("ClientePremium")) {
+							cli = new ClientePremium(nif1, nombre, domi, email);
+						} else {
+							cli = new ClienteEstandar(nif1, nombre, domi, email);
+						}	
 						
-					cli = new ClienteEstandar(nif1, nombre, domi, email);
 						
 					}
 					return cli;
@@ -158,13 +151,11 @@ public class ClienteDAO implements IClientesDAO {
 
 	@Override
 	public List<Cliente> mostrarClientesXtipo(String tipoCliente) {
-		registerDriver();
-		Connection con = null;
+
 		ResultSet rs = null;
 		List <Cliente> clientes = null;
 		
 		try {
-			con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
 			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelecttipocliente());
 			ps.setString(1, tipoCliente);
 			rs = ps.executeQuery();
@@ -205,13 +196,11 @@ public class ClienteDAO implements IClientesDAO {
 
 	@Override
 	public List<Cliente> mostrarClientesTodos() {
-		registerDriver();
-		Connection con = null;
+
 		ResultSet rs = null;
 		List <Cliente> clientes = null;
 		
 		try {
-			con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
 			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelectclientestodos());
 			rs = ps.executeQuery();
 			Cliente cli = null;

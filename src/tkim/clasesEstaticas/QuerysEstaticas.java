@@ -37,8 +37,10 @@ public class QuerysEstaticas {
     		+ "values (?, ?, ?, ?, ?, ?)";
     static final String SELECTARTICULO =  //    pedidoExiste
     		"select * from ARTICULOS WHERE CODIGO_ARTICULO  = ?";
-    
-	public static String getJdbcDriver() {
+    static final String SELECTPEDIDOPORCLIENTE =  
+            "select numero_pedido, unidades_pedido, fecha_hora_pedido, total_pedido, nif, nombre, domicilio, email, tipo_cliente, codigo_articulo, descripcion, precio_venta, gastos_envio, tiempo_preparacion from poo_uoc.pedidos, poo_uoc.clientes, poo_uoc.articulos where articulo_fk = codigo_articulo and cliente_fk = nif and cliente_fk = ?";
+	
+    public static String getJdbcDriver() {
 		return JDBC_DRIVER;
 	}
 	public static String getDbUser() {
@@ -89,6 +91,9 @@ public class QuerysEstaticas {
 	public static String getSelectarticulo() {
 		return SELECTARTICULO;
 	}
+	public static String getSelectpedidoporcliente() {
+		return SELECTPEDIDOPORCLIENTE;
+	}
     
-    
+	
 }

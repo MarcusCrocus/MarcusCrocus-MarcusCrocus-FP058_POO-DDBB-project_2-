@@ -1,8 +1,8 @@
 package tkim.modelo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-import tkim.dao.IArticuloDAO;
 import tkim.dao.IPedidoDAO;
 
 public class LanzarPedidoDAO {
@@ -20,5 +20,15 @@ public class LanzarPedidoDAO {
 	public String eliminarPedido(int numPedido) {
 		IPedidoDAO dao = (IPedidoDAO) FactoryDAOs.getDAO("Pedido");	
 		return dao.eliminarPedido(numPedido);
+	}
+	
+	public List<Pedido> mostrarPedidosEnviados(String nif) {
+		IPedidoDAO dao = (IPedidoDAO) FactoryDAOs.getDAO("Pedido");	
+		return dao.pedidosEnviados(nif);
+	}
+	
+	public List<Pedido> mostrarPedidosPendiente(String nif){
+		IPedidoDAO dao = (IPedidoDAO) FactoryDAOs.getDAO("Pedido");
+		return dao.pedidosPendientes(nif);
 	}
 }

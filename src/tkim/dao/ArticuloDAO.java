@@ -10,28 +10,21 @@ import java.util.List;
 
 
 import tkim.clasesEstaticas.QuerysEstaticas;
+import tkim.conexionBBDD.ConexionMySQL;
 import tkim.modelo.Articulo;
 
 public class ArticuloDAO implements IArticuloDAO {
-    
-    private void registerDriver() {
-        try {
-            Class.forName(QuerysEstaticas.getJdbcDriver()).newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            System.err.println("ERROR: failed to load HSQLDB JDBC driver.");
-            e.printStackTrace();
-        }
-    }
 
-
+	ConexionMySQL cMySQL = new ConexionMySQL();
+	Connection con = cMySQL.conectar();
+	
 	@Override
 	public String addArticulos(Articulo articulo) {
-		registerDriver();
+		
 		String mensaje = "El articulo no se ha podido meter";
-		Connection con = null;
+		
 		try {
 			
-			con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
 			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getInsert());
 			ps.setString(1, articulo.getCodigo());
 			ps.setString(2, articulo.getDescripcion());
@@ -65,12 +58,11 @@ public class ArticuloDAO implements IArticuloDAO {
 
 	@Override
 	public List<Articulo> mostrarArticulos() {
-		registerDriver();
-		Connection con = null;
+
 		ResultSet rs = null;
 		List <Articulo> articulos = null;
 		try {
-			con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
+
 			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelectall());
 			rs = ps.executeQuery();
 			articulos = new ArrayList<Articulo>();
@@ -101,12 +93,11 @@ public class ArticuloDAO implements IArticuloDAO {
 	
 	public Boolean existeArticulo(String codigo) {
 		Boolean existeArticulo = false;
-		registerDriver();
-		Connection con = null;
+
 		ResultSet resultado = null;
 		
 		try {
-			con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
+
 			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelecexiste());
 			ps.setString(1, codigo);
 			resultado = ps.executeQuery();
@@ -145,13 +136,12 @@ public class ArticuloDAO implements IArticuloDAO {
 
 	@Override
 	public Articulo buscarArticulo(String codigo_articulo) {
-		registerDriver();
-		Connection con = null;
+
 		ResultSet rs = null;
 		Articulo articulo = null;
 		
 		try {
-			con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
+
 			PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelectarticulo());
 			ps.setString(1, codigo_articulo);
 			rs = ps.executeQuery();

@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 import tkim.modelo.Articulo;
 import tkim.modelo.Cliente;
-import tkim.modelo.ClienteEstandar;
-import tkim.modelo.ClientePremium;
 import tkim.modelo.Exceptions;
 import tkim.modelo.Pedido;
 
@@ -146,6 +144,12 @@ public class OnlineStore {
                         throw new Exceptions("El tiempo de preparación no puede ser inferior a 120min. Vuelve a introducirlo:");
 
                     } else {
+                    	if (precioVenta.contains(",")) {
+                    		precioVenta = precioVenta.replace(",", ".");
+            			}
+                    	if (gastosEnvio.contains(",")) {
+                    		gastosEnvio = gastosEnvio.replace(",", ".");
+            			}
                         System.out.println(contro.addArticulo(codigo, descripcion, Float.parseFloat(precioVenta), Float.parseFloat(gastosEnvio), tiempoPreparacion));
                         prep = false;}
 
@@ -348,10 +352,6 @@ public class OnlineStore {
 				System.out.println("nif: "+cliente.getNif()+" nombre: "+cliente.getNombre()+" mail: "+cliente.getEmail());
 				nifClientes += cliente.getNif() + ",";
 			}
-			/*for (int i = 0; i < clientes.size(); i++) {
-				System.out.println(i + 1 + ". " + clientes.get(i).getNombre() + "\n");
-				nifClientes += String.valueOf(i + 1) + ",";
-			}*/
 
 			System.out.println("");
 			do {
@@ -408,27 +408,27 @@ public class OnlineStore {
 		// Aqui llamaremos al controlador para que nos devuelva la lista de pedidos con
 		// el filtro de enviados
 		// y lo mostraremos
-		String numeroClientes = "0";
-		String cliente = "";
+		String nifClientes = "";
+		String nif = "";		
 		System.out.println("Escoge un cliente:");
 		System.out.println("");
 
 		// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 		// listarlos
 		List <Cliente> clientes = contro.mostrarClientesTodos();
-		for (int i = 0; i < clientes.size(); i++) {
-			System.out.println(i + 1 + ". " + clientes.get(i) + "\n");
-			numeroClientes += String.valueOf(i + 1) + ",";
+		for (Cliente cli : clientes) {
+			System.out.println("nif: "+cli.getNif()+" nombre: "+cli.getNombre()+" mail: "+cli.getEmail());
+			nifClientes += cli.getNif() + ",";
 		}
-		System.out.println("");
 
 		System.out.println("");
 		do {
-			System.out.println("Elige el cliente (" + numeroClientes.substring(1) + "): ");
-			cliente = teclado.nextLine();
-		} while (!numeroClientes.contains(cliente));
+			System.out.println("Elige un nif de cliente (" + nifClientes + "): ");
+			nif = teclado.nextLine();
+		} while (!nifClientes.contains(nif+","));
+		System.out.println("");
 
-		List<Pedido> pedidos = contro.mostrarPedEnviados(Integer.parseInt(cliente));
+		List<Pedido> pedidos = contro.mostrarPedEnviados(nif);
 		System.out.println("##########################################################################");
 		System.out.println("######################## PEDIDOS ENVIADOS ################################");
 		System.out.println("##########################################################################");
@@ -451,27 +451,27 @@ public class OnlineStore {
 		// Aqui llamaremos al controlador para que nos devuelva la lista de pedidos con
 		// el filtro de pendientes
 		// y lo mostraremos
-		String numeroClientes = "0";
-		String cliente = "";
+        String nifClientes = "";
+        String nif = "";
 		System.out.println("Escoge un cliente:");
 		System.out.println("");
 
 		// Aqui llamaremos al controlador para que nos devuelva la lista de clientes y
 		// listarlos
 		List <Cliente> clientes = contro.mostrarClientesTodos();
-		for (int i = 0; i < clientes.size(); i++) {
-			System.out.println(i + 1 + ". " + clientes.get(i) + "\n");
-			numeroClientes += String.valueOf(i + 1) + ",";
+		for (Cliente cli : clientes) {
+			System.out.println("nif: "+cli.getNif()+" nombre: "+cli.getNombre()+" mail: "+cli.getEmail());
+			nifClientes += cli.getNif() + ",";
 		}
-		System.out.println("");
 
 		System.out.println("");
 		do {
-			System.out.println("Elige un cliente (" + numeroClientes.substring(1) + "): ");
-			cliente = teclado.nextLine();
-		} while (!numeroClientes.contains(cliente));
+			System.out.println("Elige un nif de cliente (" + nifClientes + "): ");
+			nif = teclado.nextLine();
+		} while (!nifClientes.contains(nif+","));
+		System.out.println("");
 
-		List<Pedido> pedidos = contro.mostrarPedPendientes(Integer.parseInt(cliente));
+		List<Pedido> pedidos = contro.mostrarPedPendientes(nif);
 		System.out.println("##########################################################################");
 		System.out.println("######################## PEDIDOS PENDIENTES ##############################");
 		System.out.println("##########################################################################");
