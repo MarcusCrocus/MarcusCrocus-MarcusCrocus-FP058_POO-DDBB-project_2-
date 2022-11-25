@@ -126,7 +126,7 @@ public class PedidoDAO implements IPedidoDAO{
         String borrado = "El pedido no se ha podido borrar";
         
         try {
-            con = DriverManager.getConnection(QuerysEstaticas.getDbUrl());
+
             PreparedStatement ps = con.prepareStatement(QuerysEstaticas.getSelectpedido());
             ps.setInt(1, numPedido);
             resultado = ps.executeQuery();

@@ -2,11 +2,7 @@ package tkim.clasesEstaticas;
 
 public class QuerysEstaticas {
 
-	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-	static final String DB_USER = "usuario_uoc";
-    static final String DB_PASS = "4321";
-    static final String DB_URL = "jdbc:mysql://localhost:2211/poo_uoc?user=" + DB_USER + "&password=" + DB_PASS +"&serverTimezone=UTC";
-    static final String INSERT = 
+	static final String INSERT = 
     		"INSERT INTO poo_uoc.ARTICULOS (codigo_articulo, descripcion, precio_venta, gastos_envio, tiempo_preparacion) "
     		+ "values (?, ?, ?, ?, ?)";
     static final String SELECTALL = 
@@ -40,19 +36,7 @@ public class QuerysEstaticas {
     static final String SELECTPEDIDOPORCLIENTE =  
             "select numero_pedido, unidades_pedido, fecha_hora_pedido, total_pedido, nif, nombre, domicilio, email, tipo_cliente, codigo_articulo, descripcion, precio_venta, gastos_envio, tiempo_preparacion from poo_uoc.pedidos, poo_uoc.clientes, poo_uoc.articulos where articulo_fk = codigo_articulo and cliente_fk = nif and cliente_fk = ?";
 	
-    public static String getJdbcDriver() {
-		return JDBC_DRIVER;
-	}
-	public static String getDbUser() {
-		return DB_USER;
-	}
-	public static String getDbPass() {
-		return DB_PASS;
-	}
-	public static String getDbUrl() {
-		return DB_URL;
-	}
-	public static String getInsert() {
+    public static String getInsert() {
 		return INSERT;
 	}
 	public static String getSelectall() {
@@ -94,6 +78,6 @@ public class QuerysEstaticas {
 	public static String getSelectpedidoporcliente() {
 		return SELECTPEDIDOPORCLIENTE;
 	}
-    
 	
+    
 }
